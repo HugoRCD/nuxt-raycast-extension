@@ -17,7 +17,7 @@ function sanitizeComponentName(componentName: string, prefix: string) {
 export default async function SearchTheme(props: LaunchProps<{ arguments: Arguments.SearchTheme }>) {
   const { prefix, version } = getPreferenceValues<Preferences>();
 
-  const name = props.arguments?.componentName ?? await getSelection();
+  const name = props.arguments?.componentName ?? (await getSelection());
 
   if (!name) {
     await showToast(Toast.Style.Failure, "Please select a component name");
