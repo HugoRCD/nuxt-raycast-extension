@@ -27,10 +27,10 @@ export default async function Command(props: LaunchProps<{ arguments: Arguments.
     return;
   }
 
-  if (proComponents.includes(name)) {
+  /*if (proComponents.includes(name)) {
     await showToast(Toast.Style.Failure, "Pro components are not yet supported");
     return;
-  }
+  }*/
 
   await showToast(Toast.Style.Animated, "Opening documentation...");
   await open(`https://ui3.nuxt.dev/components/${sanitizedName}#theme`);
