@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "nuxt-ui",
-  "title": "Nuxt UI",
+  "title": "Nuxt Ui",
   "description": "Supercharge your Nuxt UI workflow",
   "icon": "icon.png",
   "author": "HugoRCD",
