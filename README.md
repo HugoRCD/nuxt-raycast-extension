@@ -47,8 +47,6 @@ This is just the beginning. Here's what's cooking:
 
 Got ideas to make this even better? Issues and PRs are welcome!
 
----
-
 <!-- automd:contributors license=Apache author=HugoRCD/nuxt-ui-raycast-extension" -->
 
 <!-- ⚠️  (contributors) `github` is required! -->

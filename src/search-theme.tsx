@@ -14,23 +14,24 @@ function sanitizeComponentName(componentName: string, prefix: string) {
   return kebabCase(sanitized);
 }
 
-export default async function Command(props: LaunchProps<{ arguments: Arguments.SearchTheme }>) {
+export default async function SearchTheme(props: LaunchProps<{ arguments: Arguments.SearchTheme }>) {
   const { prefix, version } = getPreferenceValues<Preferences>();
-  const { componentName } = props.arguments;
-  const name = componentName !== "" ? componentName : await getSelection();
-  const sanitizedName = sanitizeComponentName(name, prefix);
-  if (!sanitizedName) {
+
+  const name = props.arguments?.componentName ?? await getSelection();
+
+  if (!name) {
     await showToast(Toast.Style.Failure, "Please select a component name");
     return;
   }
-  if (!components.includes(name) && !proComponents.includes(name)) {
+  const sanitizedName = sanitizeComponentName(name, prefix);
+  if (!components.includes(sanitizedName) && !proComponents.includes(sanitizedName)) {
     await showToast(Toast.Style.Failure, "Component not found");
     return;
   }
 
   let versionUrl = version === "v3" ? "https://ui3.nuxt.dev" : "https://ui.nuxt.com";
 
-  if (proComponents.includes(name) && version === "v2") {
+  if (proComponents.includes(sanitizedName) && version === "v2") {
     versionUrl = `${versionUrl}/pro`;
   }
 
