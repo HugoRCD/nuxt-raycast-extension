@@ -5,6 +5,7 @@ import { components, proComponents } from "./components";
 
 interface Preferences {
   prefix: string;
+  version: string;
 }
 
 function sanitizeComponentName(componentName: string, prefix: string) {
@@ -14,7 +15,7 @@ function sanitizeComponentName(componentName: string, prefix: string) {
 }
 
 export default async function Command(props: LaunchProps<{ arguments: Arguments.SearchTheme }>) {
-  const { prefix } = getPreferenceValues<Preferences>();
+  const { prefix, version } = getPreferenceValues<Preferences>();
   const { componentName } = props.arguments;
   const name = componentName !== "" ? componentName : await getSelection();
   const sanitizedName = sanitizeComponentName(name, prefix);
@@ -27,11 +28,17 @@ export default async function Command(props: LaunchProps<{ arguments: Arguments.
     return;
   }
 
+  let versionUrl = version === "v3" ? "https://ui3.nuxt.dev" : "https://ui.nuxt.com";
+
+  if (proComponents.includes(name) && version === "v2") {
+    versionUrl = `${versionUrl}/pro`;
+  }
+
   /*if (proComponents.includes(name)) {
     await showToast(Toast.Style.Failure, "Pro components are not yet supported");
     return;
   }*/
 
   await showToast(Toast.Style.Animated, "Opening documentation...");
-  await open(`https://ui3.nuxt.dev/components/${sanitizedName}#theme`);
+  await open(`${versionUrl}/components/${sanitizedName}#theme`);
 }

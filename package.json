@@ -32,8 +32,27 @@
       "type": "textfield",
       "description": "The prefix you use for your components",
       "placeholder": "U",
-      "required": true,
+      "required": false,
       "default": "U"
+    },
+    {
+      "name": "version",
+      "title": "Documentation Version",
+      "type": "dropdown",
+      "description": "The version of Nuxt UI you want to use",
+      "placeholder": "v3",
+      "required": false,
+      "default": "v3",
+      "data": [
+        {
+          "title": "v3",
+          "value": "v3"
+        },
+        {
+          "title": "v2",
+          "value": "v2"
+        }
+      ]
     }
   ],
   "dependencies": {
