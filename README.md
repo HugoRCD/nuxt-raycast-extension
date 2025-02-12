@@ -28,6 +28,12 @@ Customize the component prefix to match your style:
 - Default: "U" (UButton, UInput...)
 - Fully customizable to fit your workflow
 
+### Version Support
+Works seamlessly with both Nuxt UI versions:
+- Full support for Nuxt UI v3
+- Compatible with Nuxt UI v2 (you may have some issues with the component names)
+- Easy version switching in preferences
+
 ## 🚀 What's Coming
 
 This is just the beginning. Here's what's cooking:
