@@ -1,5 +1,4 @@
-import { showToast, Toast, LaunchProps, getPreferenceValues, open } from "@raycast/api";
-import { getSelection } from "./utils";
+import { showToast, Toast, LaunchProps, getPreferenceValues, open, getSelectedText } from "@raycast/api";
 import { kebabCase } from "scule";
 import { components, proComponents } from "./components";
 
@@ -16,8 +15,7 @@ function sanitizeComponentName(componentName: string, prefix: string) {
 
 export default async function SearchComponentTheme(props: LaunchProps<{ arguments: Arguments.SearchComponentTheme }>) {
   const { prefix, version } = getPreferenceValues<Preferences>();
-
-  const name = props.arguments?.componentName ?? (await getSelection());
+  const name = props.arguments?.componentName ?? (await getSelectedText());
 
   if (!name) {
     await showToast(Toast.Style.Failure, "Please select a component name");
