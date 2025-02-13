@@ -32,6 +32,12 @@ Works seamlessly with both Nuxt UI versions:
 - Compatible with Nuxt UI v2 (you may have some issues with the component names)
 - Easy version switching in preferences
 
+## Demo
+
+<video width="100%" autoplay loop muted>
+<source src="media/demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+
 ## 🚀 What's Coming
 
 This is just the beginning. Here's what's cooking:

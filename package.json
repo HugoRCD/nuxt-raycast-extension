@@ -12,15 +12,15 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "search-theme",
-      "title": "Search Theme",
+      "name": "search-component-theme",
+      "title": "Search Component Theme",
       "description": "Open the selected component theme",
       "mode": "no-view",
       "arguments": [
         {
           "name": "componentName",
           "type": "text",
-          "placeholder": "Component Name"
+          "placeholder": "button, input, etc..."
         }
       ]
     }
