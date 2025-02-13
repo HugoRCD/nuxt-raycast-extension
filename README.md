@@ -1,8 +1,6 @@
 <div align="center">
 <img src="media/banner.png" alt="Nuxt UI For Raycast banner">
 
-# Nuxt UI for Raycast
-
 <div align="center">
 Made with 💚 for the Nuxt community
 </div>
