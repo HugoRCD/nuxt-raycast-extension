@@ -37,6 +37,7 @@ Works seamlessly with both Nuxt UI versions:
 <video width="100%" autoplay loop muted>
 <source src="media/demo.mp4" type="video/mp4">
 Your browser does not support the video tag.
+</video>
 
 ## 🚀 What's Coming
 
