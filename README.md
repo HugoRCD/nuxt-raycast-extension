@@ -1,5 +1,5 @@
 <div align="center">
-<img src="assets/banner.png" alt="Nuxt UI For Raycast banner">
+<img src="media/banner.png" alt="Nuxt UI For Raycast banner">
 
 # Nuxt UI for Raycast
 
