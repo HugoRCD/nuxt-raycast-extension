@@ -22,7 +22,7 @@ function findComponent(sanitizedName: string): { exists: boolean; isPro: boolean
 
   return {
     exists: componentExists || proComponentExists,
-    isPro: proComponentExists
+    isPro: proComponentExists,
   };
 }
 
