@@ -34,6 +34,8 @@ Works seamlessly with both Nuxt UI versions:
 
 ## Demo
 
+I recommend you to put the shortcut to execute the command directly on `✦ + U` for example or `⌘ + U`.
+
 ![demo.gif](media/demo.gif)
 
 ## 🚀 What's Coming
