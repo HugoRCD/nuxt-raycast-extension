@@ -91,3 +91,21 @@ export const proComponents = [
   "pricingPlans",
   "user",
 ];
+
+export const proseComponents = [
+  "accordion",
+  "badge",
+  "card",
+  "cardGroup",
+  "codeCollapse",
+  "codeGroup",
+  "codePreview",
+  "codeTree",
+  "collapsible",
+  "field",
+  "fieldGroup",
+  "icon",
+  "kbd",
+  "tabs",
+  "steps"
+];
