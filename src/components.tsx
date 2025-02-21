@@ -93,6 +93,22 @@ export const proComponents = [
 ];
 
 export const proseComponents = [
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "p",
+  "a",
+  "blockquote",
+  "strong",
+  "em",
+  "ul",
+  "ol",
+  "hr",
+  "table",
+  "img",
+  "code",
+  "pre",
   "accordion",
   "badge",
   "card",

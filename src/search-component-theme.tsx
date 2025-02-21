@@ -7,10 +7,21 @@ interface Preferences {
   version: string;
 }
 
-function sanitizeComponentName(componentName: string, prefix: string) {
-  const sanitized =
-    componentName.replace(prefix, "").charAt(0).toLowerCase() + componentName.replace(prefix, "").slice(1);
-  return kebabCase(sanitized);
+/**
+ * Cleans and normalizes a component name
+ * @param componentName - Name of the component to clean (e.g., 'UButton', 'ProseBadge')
+ * @param prefix - Prefix to remove (e.g., 'U')
+ * @returns The normalized component name in kebab-case
+ */
+function sanitizeComponentName(componentName: string, prefix: string): string {
+  // Remove the "Prose" prefix if it exists
+  const withoutProsePrefix = componentName.replace(/^Prose/, '');
+
+  // Remove the specified prefix (e.g., 'U')
+  const withoutPrefix = withoutProsePrefix.replace(prefix, '');
+
+  // Convert to kebab-case for normalization
+  return kebabCase(withoutPrefix);
 }
 
 function findComponent(sanitizedName: string): { exists: boolean; isPro: boolean, isProse: boolean } {
