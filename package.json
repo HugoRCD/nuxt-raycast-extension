@@ -65,7 +65,7 @@
     "@types/node": "22.13.5",
     "@types/react": "19.0.10",
     "automd": "^0.3.12",
-    "eslint": "^9.21.0",
+    "eslint": "^8.57.1",
     "prettier": "^3.5.1",
     "typescript": "^5.7.3"
   },
