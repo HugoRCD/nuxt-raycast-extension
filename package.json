@@ -56,7 +56,7 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.91.2",
+    "@raycast/api": "^1.92.1",
     "@raycast/utils": "^1.18.1",
     "scule": "^1.3.0"
   },
