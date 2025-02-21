@@ -123,5 +123,5 @@ export const proseComponents = [
   "icon",
   "kbd",
   "tabs",
-  "steps"
+  "steps",
 ];

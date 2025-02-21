@@ -15,16 +15,16 @@ interface Preferences {
  */
 function sanitizeComponentName(componentName: string, prefix: string): string {
   // Remove the "Prose" prefix if it exists
-  const withoutProsePrefix = componentName.replace(/^Prose/, '');
+  const withoutProsePrefix = componentName.replace(/^Prose/, "");
 
   // Remove the specified prefix (e.g., 'U')
-  const withoutPrefix = withoutProsePrefix.replace(prefix, '');
+  const withoutPrefix = withoutProsePrefix.replace(prefix, "");
 
   // Convert to kebab-case for normalization
   return kebabCase(withoutPrefix);
 }
 
-function findComponent(sanitizedName: string): { exists: boolean; isPro: boolean, isProse: boolean } {
+function findComponent(sanitizedName: string): { exists: boolean; isPro: boolean; isProse: boolean } {
   const camelCaseName = camelCase(sanitizedName);
 
   const componentExists = components.includes(camelCaseName);
