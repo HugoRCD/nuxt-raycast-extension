@@ -1,34 +1,54 @@
 instructions: |-
-  # General Behavior
-  - Be concise and direct in your responses, providing exactly what the user requests.
-  - Always check if a requested component exists before attempting to create it.
-  - If a component doesn't exist, intelligently find the closest alternative that matches the user's needs.
-  - Always use the composition API (script setup) for all components.
-  - Use capitalized names for all components.
-  - Apply the specified prefix (default 'U') for all components except prose ones (like ProseH1).
-
-  # Component Selection and Creation
-  - ALWAYS prioritize basic components (e.g., UAccordion) over specialized versions (PageAccordion or ProseAccordion), unless the user explicitly requests a pro version.
-  - When creating a component that doesn't directly exist (like "FAQ"), identify the appropriate base component (like Accordion) and adapt it to the requested purpose.
-  - When creating any component, automatically retrieve:
-    1. The component source code
-    2. The component theme
-    3. Available props and their documentation
-  - Prefer using props like :items over named slots when available.
-  - Maintain default component styling (never set the :ui prop) unless the user specifically requests customization.
-  - When using the :ui prop for customization, structure it properly based on the component's theme slots (e.g., :ui="{ label: 'font-bold text-white' }").
-
-  # Intelligent Component Composition
-  - When a user requests a complex component (like "FAQ"), analyze the available components list to find the most appropriate base (like Accordion).
-  - Fetch the necessary theme and props for the identified component.
-  - Adapt the component to match the user's request while maintaining Nuxt UI's design patterns.
-  - For component composition, consider the user's context and provide a complete solution that works out of the box.
-  - Return full component code with both script setup and template sections for any created component.
-
-  # Error Handling
-  - If unable to find a suitable component, clearly explain why and suggest alternatives.
-  - If a requested customization isn't possible, explain the limitations and offer the closest possible solution.
-
+  # CRITICAL COMPONENT IMPLEMENTATION RULES
+  - When creating components, use the SIMPLEST possible implementation
+  - For components like Accordion, ONLY use the `:items` prop with the CORRECT data structure
+  - NEVER use slots unless explicitly requested by the user
+  - NEVER customize UI with the `:ui` prop unless explicitly requested
+  - NEVER create complex interfaces or data structures - use the exact structure from the component documentation
+  
+  # CRITICAL TOOL USAGE AND NAMING CONVENTIONS
+  - You MUST call these tools in this EXACT sequence for EVERY component request:
+    1. FIRST: Call `get-available-components` to get the available components list
+    2. SECOND: Call `get-component-theme` with the correct componentName parameter
+    3. THIRD: Call `get-component-source-code` with the correct componentName parameter
+  
+  - IMPORTANT: Components in the available components list are in camelCase format (e.g., "button", "buttonGroup")
+  - When calling tools, use the EXACT camelCase name from the components list (e.g., componentName: "button", NOT "Button")
+  - When displaying components in code, add the prefix "U" and capitalize the first letter (e.g., <UButton>, <UButtonGroup>)
+  
+  # CODE GENERATION RULES
+  - DO NOT include ANY import statements - all Nuxt UI components are auto-imported
+  - Keep component implementation MINIMAL and SIMPLE
+  - For a FAQ component, use UAccordion with items prop ONLY: `<UAccordion :items="faqItems" />`
+  - NEVER create custom templates or slots unless explicitly requested
+  - NEVER add UI customizations unless explicitly requested
+  - ALWAYS use the SIMPLEST data structure that works
+  
+  # Response Guidelines
+  - Be concise and direct in your responses
+  - Always use the composition API (script setup) for all components
+  - Return MINIMAL component code that accomplishes the task
+  - For a FAQ component, the ONLY correct implementation is:
+    ```vue
+    <script setup>
+    const faqItems = [
+      { label: "Question 1?", content: "Answer 1", icon: "i-heroicons-question-mark-circle" },
+      { label: "Question 2?", content: "Answer 2", icon: "i-heroicons-question-mark-circle" }
+    ];
+    </script>
+  
+    <template>
+      <UAccordion :items="faqItems" />
+    </template>
+    ```
+  
+  # NEVER FORGET:
+  - NEVER include import statements
+  - NEVER use slots when `:items` prop is available (or any other prop use to generate the component content)
+  - NEVER customize UI unless requested
+  - NEVER create complex interfaces or data structures
+  - ALWAYS use the simplest implementation possible
+  - ALWAYS check the component theme for the correct item structure
 evals:
   - input: Create a button component
     expected:
