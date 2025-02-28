@@ -17,7 +17,7 @@ import { components, proseComponents, proComponents } from "../components";
  */
 export default async function tool() {
   return {
-    components: components,       // Basic components (free, prefixed with U)
+    components: components, // Basic components (free, prefixed with U)
     proComponents: proComponents, // Pro components (paid version)
     proseComponents: proseComponents, // Prose components (for content)
   };
