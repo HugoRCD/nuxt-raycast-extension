@@ -67,6 +67,6 @@ export default async function SearchComponentTheme(props: LaunchProps<{ argument
   if (!isProse) {
     await open(`${versionUrl}/components/${sanitizedName}#theme`);
   } else {
-    await open(`https://ui3.nuxt.dev/getting-started/typography#${sanitizedName.replace('-', '')}`);
+    await open(`https://ui3.nuxt.dev/getting-started/typography#${sanitizedName.replace("-", "")}`);
   }
 }
