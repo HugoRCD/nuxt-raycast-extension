@@ -9,6 +9,6 @@ export default async function tool() {
   return {
     components: components,
     proComponents: proComponents,
-    proseComponents: proseComponents
-  }
-};
+    proseComponents: proseComponents,
+  };
+}

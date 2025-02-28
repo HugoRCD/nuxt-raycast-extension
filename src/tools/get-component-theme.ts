@@ -182,4 +182,4 @@ export default async function tool(input: Input) {
       "Content-Type": "text/plain",
     },
   });
-};
+}

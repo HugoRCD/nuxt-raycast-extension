@@ -10,4 +10,4 @@ export default async function tool() {
       "Content-Type": "text/plain",
     },
   });
-};
+}
