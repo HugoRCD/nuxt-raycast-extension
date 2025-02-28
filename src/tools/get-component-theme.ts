@@ -17,17 +17,10 @@ type Input = {
  * @returns The component's theme configuration as a string
  */
 export default async function tool(input: Input) {
-  // Convert first letter to uppercase for the API call
-  const componentName = input.componentName.charAt(0).toUpperCase() + input.componentName.slice(1);
-
-  try {
-    return await $fetch(`https://raw.githubusercontent.com/nuxt/ui/refs/heads/v3/src/theme/${componentName}.ts`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    });
-  } catch (error) {
-    return `Error: Could not fetch theme for ${componentName}. Please verify the component name is correct and try again.`;
-  }
+  return await $fetch(`https://raw.githubusercontent.com/nuxt/ui/refs/heads/v3/src/theme/${input.componentName}.ts`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
 }

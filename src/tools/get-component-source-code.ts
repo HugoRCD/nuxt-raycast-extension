@@ -20,17 +20,13 @@ export default async function tool(input: Input) {
   // Convert first letter to uppercase for the API call
   const componentName = input.componentName.charAt(0).toUpperCase() + input.componentName.slice(1);
 
-  try {
-    return await $fetch(
-      `https://raw.githubusercontent.com/nuxt/ui/refs/heads/v3/src/runtime/components/${componentName}.vue`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "text/plain",
-        },
+  return await $fetch(
+    `https://raw.githubusercontent.com/nuxt/ui/refs/heads/v3/src/runtime/components/${componentName}.vue`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "text/plain",
       },
-    );
-  } catch (error) {
-    return `Error: Could not fetch source code for ${componentName}. Please verify the component name is correct and try again.`;
-  }
+    },
+  );
 }

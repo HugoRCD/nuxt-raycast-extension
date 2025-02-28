@@ -87,10 +87,131 @@ evals:
             componentName: Accordion
       - meetsCriteria: |-
           Returns a complete FAQ component based on UAccordion with appropriate items structure and styling
-  - input: Create a customized button with red background
+  - input: "@nuxt-ui How many components in Nuxt UI ?"
+    mocks:
+      get-available-components:
+        components:
+          - app
+          - accordion
+          - alert
+          - avatar
+          - avatarGroup
+          - badge
+          - breadcrumb
+          - button
+          - buttonGroup
+          - calendar
+          - card
+          - carousel
+          - checkbox
+          - chip
+          - collapsible
+          - colorPicker
+          - commandPalette
+          - container
+          - contextMenu
+          - drawer
+          - dropdownMenu
+          - form
+          - formField
+          - icon
+          - input
+          - inputMenu
+          - inputNumber
+          - kbd
+          - link
+          - modal
+          - navigationMenu
+          - pagination
+          - pinInput
+          - popover
+          - progress
+          - radioGroup
+          - select
+          - selectMenu
+          - separator
+          - skeleton
+          - slideover
+          - slider
+          - stepper
+          - switch
+          - table
+          - tabs
+          - textarea
+          - toast
+          - tooltip
+        proComponents:
+          - banner
+          - blogPost
+          - blogPosts
+          - colorModeAvatar
+          - colorModeButton
+          - colorModeImage
+          - colorModeSelect
+          - colorModeSwitch
+          - contentNavigation
+          - contentSearch
+          - contentSearchButton
+          - contentSurround
+          - contentToc
+          - error
+          - footer
+          - footerColumns
+          - header
+          - localeSelect
+          - main
+          - page
+          - pageAccordion
+          - pageAnchors
+          - pageAside
+          - pageBody
+          - pageCard
+          - pageColumns
+          - pageCta
+          - pageFeature
+          - pageGrid
+          - pageHeader
+          - pageHero
+          - pageLinks
+          - pageList
+          - pageLogos
+          - pageMarquee
+          - pageSection
+          - pricingPlan
+          - pricingPlans
+          - user
+        proseComponents:
+          - h1
+          - h2
+          - h3
+          - h4
+          - p
+          - a
+          - blockquote
+          - strong
+          - em
+          - ul
+          - ol
+          - hr
+          - table
+          - img
+          - code
+          - pre
+          - accordion
+          - badge
+          - card
+          - cardGroup
+          - codeCollapse
+          - codeGroup
+          - codePreview
+          - codeTree
+          - collapsible
+          - field
+          - fieldGroup
+          - icon
+          - kbd
+          - tabs
+          - steps
     expected:
-      - callsTool: get-available-components
-      - callsTool: get-component-theme
-      - callsTool: get-component-source-code
-      - meetsCriteria: |-
-          Returns a UButton component with appropriate :ui prop setting for red background
+      - callsTool:
+          name: get-available-components
