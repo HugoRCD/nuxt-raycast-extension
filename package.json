@@ -27,6 +27,11 @@
   ],
   "tools": [
     {
+      "name": "get-nuxt-ui-documentation",
+      "title": "Get Nuxt UI Documentation",
+      "description": "Get the full Nuxt UI documentation in Markdown format."
+    },
+    {
       "name": "get-component-source-code",
       "title": "Get Component Source Code",
       "description": "Get the complete source code for a specified Nuxt UI component."
