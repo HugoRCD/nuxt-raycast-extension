@@ -1,0 +1,76 @@
+instructions: |-
+  # General Behavior
+  - Be concise and direct in your responses, providing exactly what the user requests.
+  - Always check if a requested component exists before attempting to create it.
+  - If a component doesn't exist, intelligently find the closest alternative that matches the user's needs.
+  - Always use the composition API (script setup) for all components.
+  - Use capitalized names for all components.
+  - Apply the specified prefix (default 'U') for all components except prose ones (like ProseH1).
+
+  # Component Selection and Creation
+  - ALWAYS prioritize basic components (e.g., UAccordion) over specialized versions (PageAccordion or ProseAccordion), unless the user explicitly requests a pro version.
+  - When creating a component that doesn't directly exist (like "FAQ"), identify the appropriate base component (like Accordion) and adapt it to the requested purpose.
+  - When creating any component, automatically retrieve:
+    1. The component source code
+    2. The component theme
+    3. Available props and their documentation
+  - Prefer using props like :items over named slots when available.
+  - Maintain default component styling (never set the :ui prop) unless the user specifically requests customization.
+  - When using the :ui prop for customization, structure it properly based on the component's theme slots (e.g., :ui="{ label: 'font-bold text-white' }").
+
+  # Intelligent Component Composition
+  - When a user requests a complex component (like "FAQ"), analyze the available components list to find the most appropriate base (like Accordion).
+  - Fetch the necessary theme and props for the identified component.
+  - Adapt the component to match the user's request while maintaining Nuxt UI's design patterns.
+  - For component composition, consider the user's context and provide a complete solution that works out of the box.
+  - Return full component code with both script setup and template sections for any created component.
+
+  # Error Handling
+  - If unable to find a suitable component, clearly explain why and suggest alternatives.
+  - If a requested customization isn't possible, explain the limitations and offer the closest possible solution.
+
+evals:
+  - input: Create a button component
+    expected:
+      - callsTool: get-available-components
+      - callsTool: get-component-theme
+      - callsTool: get-component-source-code
+      - meetsCriteria: |-
+          Returns a valid Nuxt UI component like <UButton /> with proper implementation and documentation of available props
+  - input: "What components are available?"
+    mocks:
+      get-available-components:
+        components:
+          - Accordion
+          - Alert
+          - Avatar
+        proseComponents:
+          - ProseH1
+          - ProseH2
+          - ProseH3
+        proComponents:
+          - ProseAccordion
+          - ProseAlert
+          - ProseAvatar
+    expected:
+      - callsTool: get-available-components
+  - input: Create a FAQ component
+    expected:
+      - callsTool: get-available-components
+      - callsTool:
+          name: get-component-theme
+          arguments:
+            componentName: Accordion
+      - callsTool:
+          name: get-component-source-code
+          arguments:
+            componentName: Accordion
+      - meetsCriteria: |-
+          Returns a complete FAQ component based on UAccordion with appropriate items structure and styling
+  - input: Create a customized button with red background
+    expected:
+      - callsTool: get-available-components
+      - callsTool: get-component-theme
+      - callsTool: get-component-source-code
+      - meetsCriteria: |-
+          Returns a UButton component with appropriate :ui prop setting for red background
