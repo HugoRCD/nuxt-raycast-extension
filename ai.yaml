@@ -17,7 +17,7 @@ instructions: |-
   - When displaying components in code, add the prefix "U" and capitalize the first letter (e.g., <UButton>, <UButtonGroup>)
   
   # CODE GENERATION RULES
-  - DO NOT include ANY import statements - all Nuxt UI components are auto-imported
+  - DO NOT include ANY import statements as we are in a Nuxt environment - all Nuxt UI components are auto-imported (and all Vue macros are also)
   - Keep component implementation MINIMAL and SIMPLE
   - For a FAQ component, use UAccordion with items prop ONLY: `<UAccordion :items="faqItems" />`
   - NEVER create custom templates or slots unless explicitly requested
@@ -26,9 +26,9 @@ instructions: |-
   
   # Response Guidelines
   - Be concise and direct in your responses
-  - Always use the composition API (script setup) for all components
+  - Always use the composition API (script setup lang="ts") for all components
   - Return MINIMAL component code that accomplishes the task
-  - For a FAQ component, the ONLY correct implementation is:
+  - For a FAQ component, the ONLY correct implementation is (example of a correct component implementation):
     ```vue
     <script setup>
     const faqItems = [
@@ -43,7 +43,7 @@ instructions: |-
     ```
   
   # NEVER FORGET:
-  - NEVER include import statements
+  - NEVER include import statements (Vue macro, composables, etc)
   - NEVER use slots when `:items` prop is available (or any other prop use to generate the component content)
   - NEVER customize UI unless requested
   - NEVER create complex interfaces or data structures
@@ -55,6 +55,7 @@ evals:
       - callsTool: get-available-components
       - callsTool: get-component-theme
       - callsTool: get-component-source-code
+      - includes: "<UButton />"
       - meetsCriteria: |-
           Returns a valid Nuxt UI component like <UButton /> with proper implementation and documentation of available props
   - input: "What components are available?"
@@ -97,89 +98,12 @@ evals:
           - avatar
           - avatarGroup
           - badge
-          - breadcrumb
-          - button
-          - buttonGroup
-          - calendar
-          - card
-          - carousel
-          - checkbox
-          - chip
-          - collapsible
-          - colorPicker
-          - commandPalette
-          - container
-          - contextMenu
-          - drawer
-          - dropdownMenu
-          - form
-          - formField
-          - icon
-          - input
-          - inputMenu
-          - inputNumber
-          - kbd
-          - link
-          - modal
-          - navigationMenu
-          - pagination
-          - pinInput
-          - popover
-          - progress
-          - radioGroup
-          - select
-          - selectMenu
-          - separator
-          - skeleton
-          - slideover
-          - slider
-          - stepper
-          - switch
-          - table
-          - tabs
-          - textarea
-          - toast
-          - tooltip
         proComponents:
           - banner
           - blogPost
           - blogPosts
           - colorModeAvatar
-          - colorModeButton
-          - colorModeImage
-          - colorModeSelect
-          - colorModeSwitch
-          - contentNavigation
-          - contentSearch
-          - contentSearchButton
-          - contentSurround
-          - contentToc
-          - error
-          - footer
-          - footerColumns
-          - header
-          - localeSelect
-          - main
-          - page
           - pageAccordion
-          - pageAnchors
-          - pageAside
-          - pageBody
-          - pageCard
-          - pageColumns
-          - pageCta
-          - pageFeature
-          - pageGrid
-          - pageHeader
-          - pageHero
-          - pageLinks
-          - pageList
-          - pageLogos
-          - pageMarquee
-          - pageSection
-          - pricingPlan
-          - pricingPlans
-          - user
         proseComponents:
           - h1
           - h2
@@ -187,31 +111,6 @@ evals:
           - h4
           - p
           - a
-          - blockquote
-          - strong
-          - em
-          - ul
-          - ol
-          - hr
-          - table
-          - img
-          - code
-          - pre
-          - accordion
-          - badge
-          - card
-          - cardGroup
-          - codeCollapse
-          - codeGroup
-          - codePreview
-          - codeTree
-          - collapsible
-          - field
-          - fieldGroup
-          - icon
-          - kbd
-          - tabs
-          - steps
     expected:
       - callsTool:
           name: get-available-components
