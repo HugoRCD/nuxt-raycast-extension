@@ -16,14 +16,10 @@ import { $fetch } from "ofetch";
  * @returns The full Nuxt UI documentation as a string
  */
 export default async function tool() {
-  try {
-    return await $fetch("https://ui3.nuxt.dev/llms_full.txt", {
-      method: "GET",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-    });
-  } catch (error) {
-    return "Error: Could not fetch Nuxt UI documentation. Please try again later.";
-  }
+  return await $fetch("https://ui3.nuxt.dev/llms.txt", {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
 }
