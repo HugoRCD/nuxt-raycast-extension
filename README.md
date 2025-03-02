@@ -7,6 +7,8 @@ Made with 💚 for the Nuxt community
 
 ---
 
+<a title="Install nuxt-ui Raycast Extension" href="https://www.raycast.com/HugoRCD/nuxt-ui"><img src="https://www.raycast.com/HugoRCD/nuxt-ui/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;"></a>
+
 </div>
 
 Never leave your editor to check component themes again. Access Nuxt UI documentation instantly while you code.
