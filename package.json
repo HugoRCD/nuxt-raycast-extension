@@ -23,6 +23,12 @@
           "placeholder": "button, input, etc..."
         }
       ]
+    },
+    {
+      "name": "search-modules",
+      "title": "Search modules",
+      "description": "Search modules",
+      "mode": "view"
     }
   ],
   "tools": [
