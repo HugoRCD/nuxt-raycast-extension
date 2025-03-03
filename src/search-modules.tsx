@@ -27,6 +27,7 @@ export default function Command() {
   const [modules, setModules] = useState<Module[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchModules() {
@@ -48,19 +49,23 @@ export default function Command() {
     fetchModules();
   }, []);
 
+  const categories = Array.from(new Set(modules.map(module => module.category).filter(Boolean)));
+
   const filteredModules = modules.filter((module) => {
-    if (!searchText) return true;
-    return (
+    const matchesSearchText = !searchText || 
       module.name.toLowerCase().includes(searchText.toLowerCase()) ||
       module.description.toLowerCase().includes(searchText.toLowerCase()) ||
-      module.npm.toLowerCase().includes(searchText.toLowerCase())
-    );
+      module.npm.toLowerCase().includes(searchText.toLowerCase());
+    
+    const matchesCategory = !selectedCategory || module.category === selectedCategory;
+    
+    return matchesSearchText && matchesCategory;
   });
 
   const sortedModules = [...filteredModules].sort((a, b) => a.name.localeCompare(b.name));
 
   async function copyInstallCommand(npmPackage: string) {
-    const command = `npm install ${npmPackage}`;
+    const command = `npx nuxi module add ${npmPackage}`;
     await Clipboard.copy(command);
     await showToast({
       style: Toast.Style.Success,
@@ -75,23 +80,36 @@ export default function Command() {
       onSearchTextChange={setSearchText}
       searchBarPlaceholder="Search Nuxt modules..."
       throttle
+      searchBarAccessory={
+        <List.Dropdown
+          tooltip="Filter by Category"
+          value={selectedCategory || ""}
+          onChange={setSelectedCategory}
+        >
+          <List.Dropdown.Item title="All Categories" value="" />
+          {categories.map((category) => (
+            <List.Dropdown.Item key={category} title={category || ""} value={category || ""} />
+          ))}
+        </List.Dropdown>
+      }
     >
       {sortedModules.map((module) => {
-        const iconUrl = moduleImage(module.icon)
-        
         return (
           <List.Item
             key={module.npm}
-            icon={iconUrl || { source: Icon.Box }}
+            icon={moduleImage(module.icon) || { source: Icon.Box }}
             title={module.name}
             subtitle={module.description}
-            accessories={[{ text: module.npm }]}
+            accessories={[
+              { text: module.category || "" },
+              { text: module.npm }
+            ]}
             actions={
               <ActionPanel>
                 <Action
                   title="Copy Install Command"
                   icon={{ source: Icon.CopyClipboard }}
-                  onAction={() => copyInstallCommand(`npx nuxi module add ${module.name}`)}
+                  onAction={() => copyInstallCommand(module.name)}
                 />
                 {module.github && (
                   <Action.OpenInBrowser
@@ -137,7 +155,6 @@ export default function Command() {
     </List>
   );
 }
-
 
 export const moduleImage = function (icon: string = '', size: number = 80) {
   if (!icon) return
