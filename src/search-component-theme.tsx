@@ -1,64 +1,15 @@
 import { showToast, Toast, LaunchProps, getPreferenceValues, open, getSelectedText } from "@raycast/api";
-import { kebabCase, camelCase } from "scule";
-import { components, proComponents, proseComponents } from "./utils/components-list";
-import type { ComponentContext, ComponentInfo } from "./types/components";
-
-/**
- * Cleans and normalizes a component name
- * @param componentName - Name of the component to clean (e.g., 'UButton', 'ProseBadge')
- * @param prefix - Prefix to remove (e.g., 'U')
- * @returns The normalized component name in kebab-case
- */
-function sanitizeComponentName(componentName: string, prefix: string): string {
-  return kebabCase(componentName.replace(/^(Prose|prose)/, "").replace(prefix, ""));
-}
-
-/**
- * Determines component type and existence
- */
-function getComponentInfo(sanitizedName: string): ComponentInfo {
-  const camelCaseName = camelCase(sanitizedName);
-
-  const isBase = components.includes(camelCaseName);
-  const isPro = proComponents.includes(camelCaseName);
-  const isProse = proseComponents.includes(camelCaseName);
-
-  return {
-    exists: isBase || isPro || isProse,
-    isBase,
-    isPro,
-    isProse,
-  };
-}
-
-/**
- * Builds the documentation URL based on component info and preferences
- */
-function buildDocumentationUrl(context: ComponentContext, version: string): string {
-  const { sanitizedName, hasProsePrefix, componentInfo } = context;
-  const { isBase, isPro, isProse } = componentInfo;
-
-  const baseUrl = version === "v3" ? "https://ui3.nuxt.dev" : "https://ui.nuxt.com";
-  const versionUrl = isPro && version === "v2" ? `${baseUrl}/pro` : baseUrl;
-
-  if (hasProsePrefix) {
-    return `https://ui3.nuxt.dev/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
-  }
-
-  if (isProse && !isBase) {
-    return `https://ui3.nuxt.dev/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
-  }
-
-  return `${versionUrl}/components/${sanitizedName}#theme`;
-}
+import type { ComponentContext } from "./types/components";
+import { sanitizeComponentName, getComponentInfo, buildDocumentationUrl } from "./utils/components";
 
 /**
  * Main function to handle component theme search
  */
 export default async function SearchComponentTheme(props: LaunchProps<{ arguments: Arguments.SearchComponentTheme }>) {
   try {
-    const { prefix, version } = getPreferenceValues<Preferences>();
+    const { prefix, version: preferenceVersion } = getPreferenceValues<Preferences>();
     const name = props.arguments?.componentName ?? (await getSelectedText());
+    const version = props.arguments?.version ?? preferenceVersion;
 
     if (!name) {
       await showToast(Toast.Style.Failure, "Please select a component name");
