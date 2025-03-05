@@ -16,5 +16,5 @@ export interface Module {
 }
 
 export interface ApiResponse {
-  modules: Module[]
+  modules: Module[];
 }
