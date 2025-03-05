@@ -41,6 +41,12 @@
       ]
     },
     {
+      "name": "search-components",
+      "title": "Search Components",
+      "description": "Search and browse all Nuxt UI components",
+      "mode": "view"
+    },
+    {
       "name": "search-modules",
       "title": "Search modules",
       "description": "Search modules",
