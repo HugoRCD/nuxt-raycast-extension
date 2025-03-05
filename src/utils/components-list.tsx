@@ -48,6 +48,7 @@ export const components = [
   "textarea",
   "toast",
   "tooltip",
+  "tree"
 ];
 
 export const proComponents = [
