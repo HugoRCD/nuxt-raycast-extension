@@ -23,6 +23,12 @@
           "placeholder": "button, input, etc..."
         }
       ]
+    },
+    {
+      "name": "search-modules",
+      "title": "Search modules",
+      "description": "Search modules",
+      "mode": "view"
     }
   ],
   "tools": [
@@ -45,6 +51,11 @@
       "name": "get-available-components",
       "title": "Get All Available Components",
       "description": "Get the list of all available components."
+    },
+    {
+      "name": "get-available-modules",
+      "title": "Get All Available Modules",
+      "description": "Get the list of all available modules."
     }
   ],
   "preferences": [

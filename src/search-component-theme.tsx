@@ -1,20 +1,7 @@
 import { showToast, Toast, LaunchProps, getPreferenceValues, open, getSelectedText } from "@raycast/api";
 import { kebabCase, camelCase } from "scule";
-import { components, proComponents, proseComponents } from "./components";
-
-interface ComponentInfo {
-  exists: boolean;
-  isBase: boolean;
-  isPro: boolean;
-  isProse: boolean;
-}
-
-interface ComponentContext {
-  name: string;
-  sanitizedName: string;
-  hasProsePrefix: boolean;
-  componentInfo: ComponentInfo;
-}
+import { components, proComponents, proseComponents } from "./utils/components-list";
+import type { ComponentContext, ComponentInfo } from "./types/components";
 
 /**
  * Cleans and normalizes a component name
