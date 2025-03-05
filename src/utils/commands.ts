@@ -51,4 +51,4 @@ export async function copyToClipboard(text: string, successMessage: string = "Co
 export async function handleCommandError(error: unknown, message: string = "An error occurred"): Promise<void> {
   console.error(error);
   await showFailureToast(message);
-} 
+}

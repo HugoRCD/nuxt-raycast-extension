@@ -21,7 +21,7 @@ export default async function SearchComponentTheme(props: LaunchProps<{ argument
     const hasProsePrefix = name.startsWith("Prose") || name.startsWith("prose");
     const sanitizedName = sanitizeComponentName(name, prefix);
     const componentInfo = getComponentInfo(sanitizedName);
-    
+
     if (!componentInfo.exists) {
       await showFailureToast("Component not found");
       return;
@@ -39,7 +39,7 @@ export default async function SearchComponentTheme(props: LaunchProps<{ argument
     const componentItem = {
       name: sanitizedName,
       type,
-      camelCaseName: sanitizedName
+      camelCaseName: sanitizedName,
     };
 
     // Open the theme documentation with the specified version

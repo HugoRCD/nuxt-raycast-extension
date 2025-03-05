@@ -44,7 +44,7 @@ export function getAllComponents(): ComponentItem[] {
 export function filterComponents(
   components: ComponentItem[],
   searchText: string,
-  selectedType: string | null
+  selectedType: string | null,
 ): ComponentItem[] {
   return components.filter((component) => {
     // Filter by type if selected
@@ -70,4 +70,4 @@ export function filterComponents(
  */
 export function sortComponentsByName(components: ComponentItem[]): ComponentItem[] {
   return [...components].sort((a, b) => a.name.localeCompare(b.name));
-} 
+}

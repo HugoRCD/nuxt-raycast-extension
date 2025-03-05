@@ -22,7 +22,7 @@ export function capitalizeFirstLetter(string: string): string {
  */
 export function getFormattedComponentName(component: ComponentItem): string {
   const { prefix } = getExtensionPreferences();
-  
+
   if (component.type === "base") {
     // For base components, add the prefix and capitalize each word
     // e.g., "dropdown-menu" -> "UDropdownMenu"
@@ -50,7 +50,7 @@ export function createComponentContext(component: ComponentItem): ComponentConte
   const hasProsePrefix = component.type === "prose";
   const sanitizedName = component.name;
   const componentInfo = getComponentInfo(sanitizedName);
-  
+
   return {
     name: getFormattedComponentName(component),
     sanitizedName,
@@ -63,9 +63,9 @@ export function createComponentContext(component: ComponentItem): ComponentConte
  * Open documentation with or without the theme section
  */
 export async function openDocumentation(
-  component: ComponentItem, 
+  component: ComponentItem,
   showTheme: boolean = false,
-  version?: string
+  version?: string,
 ): Promise<void> {
   try {
     const context = createComponentContext(component);
@@ -121,4 +121,4 @@ export function getComponentTypeLabel(type: string): string {
     default:
       return "";
   }
-} 
+}

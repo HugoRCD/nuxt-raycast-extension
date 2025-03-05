@@ -29,16 +29,17 @@ export default function Command() {
     fetchModules();
   }, []);
 
-  const categories = Array.from(new Set(modules.map(module => module.category).filter(Boolean)));
+  const categories = Array.from(new Set(modules.map((module) => module.category).filter(Boolean)));
 
   const filteredModules = modules.filter((module) => {
-    const matchesSearchText = !searchText || 
+    const matchesSearchText =
+      !searchText ||
       module.name.toLowerCase().includes(searchText.toLowerCase()) ||
       module.description.toLowerCase().includes(searchText.toLowerCase()) ||
       module.npm.toLowerCase().includes(searchText.toLowerCase());
-    
+
     const matchesCategory = !selectedCategory || module.category === selectedCategory;
-    
+
     return matchesSearchText && matchesCategory;
   });
 
@@ -61,11 +62,7 @@ export default function Command() {
       searchBarPlaceholder="Search Nuxt modules..."
       throttle
       searchBarAccessory={
-        <List.Dropdown
-          tooltip="Filter by Category"
-          value={selectedCategory || ""}
-          onChange={setSelectedCategory}
-        >
+        <List.Dropdown tooltip="Filter by Category" value={selectedCategory || ""} onChange={setSelectedCategory}>
           <List.Dropdown.Item title="All Categories" value="" />
           {categories.map((category) => (
             <List.Dropdown.Item key={category} title={category || ""} value={category || ""} />
@@ -80,10 +77,7 @@ export default function Command() {
             icon={moduleImage(module.icon) || { source: Icon.Box }}
             title={module.name}
             subtitle={module.description}
-            accessories={[
-              { text: module.category || "" },
-              { text: module.npm }
-            ]}
+            accessories={[{ text: module.category || "" }, { text: module.npm }]}
             actions={
               <ActionPanel>
                 <Action
@@ -99,25 +93,21 @@ export default function Command() {
                   />
                 )}
                 {module.website && (
-                  <Action.OpenInBrowser
-                    title="Open Website"
-                    url={module.website}
-                    icon={{ source: Icon.Globe }}
-                  />
+                  <Action.OpenInBrowser title="Open Website" url={module.website} icon={{ source: Icon.Globe }} />
                 )}
                 <ActionPanel.Section title="Package Managers">
                   <Action
-                    title="Copy bun Command"
+                    title="Copy Bun Command"
                     icon={{ source: Icon.CopyClipboard }}
                     onAction={() => Clipboard.copy(`bun add ${module.npm}`)}
                   />
                   <Action
-                    title="Copy pnpm Command"
+                    title="Copy Pnpm Command"
                     icon={{ source: Icon.CopyClipboard }}
                     onAction={() => Clipboard.copy(`pnpm add ${module.npm}`)}
                   />
                   <Action
-                    title="Copy yarn Command"
+                    title="Copy Yarn Command"
                     icon={{ source: Icon.CopyClipboard }}
                     onAction={() => Clipboard.copy(`yarn add ${module.npm}`)}
                   />
@@ -136,12 +126,12 @@ export default function Command() {
   );
 }
 
-export const moduleImage = function (icon: string = '', size: number = 80) {
-  if (!icon) return
+export const moduleImage = function (icon: string = "", size: number = 80) {
+  if (!icon) return;
 
-  if (/^http(s)?:\/\//.test(icon)) return icon
+  if (/^http(s)?:\/\//.test(icon)) return icon;
 
-  if (/\.svg$/.test(icon)) return `https://raw.githubusercontent.com/nuxt/modules/main/icons/${icon}`
+  if (/\.svg$/.test(icon)) return `https://raw.githubusercontent.com/nuxt/modules/main/icons/${icon}`;
 
-  return `https://ipx.nuxt.com/s_${size},f_auto/gh/nuxt/modules/main/icons/${icon}`
-}
+  return `https://ipx.nuxt.com/s_${size},f_auto/gh/nuxt/modules/main/icons/${icon}`;
+};

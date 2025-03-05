@@ -1,26 +1,22 @@
 import { useState } from "react";
 import { List, ActionPanel, Action, Icon } from "@raycast/api";
-import { 
-  getComponentIcon, 
-  getComponentTypeLabel, 
-  getDisplayName, 
-  getFormattedComponentName, 
-  openDocumentation 
+import {
+  getComponentIcon,
+  getComponentTypeLabel,
+  getDisplayName,
+  getFormattedComponentName,
+  openDocumentation,
 } from "./utils/component";
-import { 
-  getAllComponents, 
-  filterComponents, 
-  sortComponentsByName 
-} from "./utils/search";
+import { getAllComponents, filterComponents, sortComponentsByName } from "./utils/search";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [components, setComponents] = useState(getAllComponents());
-  
+  const [components] = useState(getAllComponents());
+
   // Filter components based on search text and selected type
   const filteredComponents = filterComponents(components, searchText, selectedType);
-  
+
   // Sort components alphabetically
   const sortedComponents = sortComponentsByName(filteredComponents);
 
@@ -30,11 +26,7 @@ export default function Command() {
       searchBarPlaceholder="Search Nuxt UI components..."
       throttle
       searchBarAccessory={
-        <List.Dropdown
-          tooltip="Filter by Type"
-          value={selectedType || ""}
-          onChange={setSelectedType}
-        >
+        <List.Dropdown tooltip="Filter by Type" value={selectedType || ""} onChange={setSelectedType}>
           <List.Dropdown.Item title="All Types" value="" />
           <List.Dropdown.Item title="Base Components" value="base" />
           <List.Dropdown.Item title="Pro Components" value="pro" />
@@ -61,10 +53,7 @@ export default function Command() {
                   icon={Icon.Brush}
                   onAction={() => openDocumentation(component, true)}
                 />
-                <Action.CopyToClipboard
-                  title="Copy Component Name"
-                  content={getFormattedComponentName(component)}
-                />
+                <Action.CopyToClipboard title="Copy Component Name" content={getFormattedComponentName(component)} />
               </ActionPanel>
             }
           />
@@ -72,4 +61,4 @@ export default function Command() {
       })}
     </List>
   );
-} 
+}
