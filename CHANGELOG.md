@@ -1,5 +1,9 @@
 # Nuxt UI Changelog
 
+## [Add modules search] - {PR_MERGE_DATE}
+
+Introduced a new command to search for Nuxt modules.
+
 ## [Initial Version] - {PR_MERGE_DATE}
 
 - Added the initial version of Nuxt UI for Raycast with the following commands:

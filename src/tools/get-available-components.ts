@@ -1,4 +1,4 @@
-import { components, proseComponents, proComponents } from "../components";
+import { components, proseComponents, proComponents } from "../utils/components-list";
 
 /**
  * Get the list of all available Nuxt UI components

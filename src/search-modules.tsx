@@ -1,27 +1,7 @@
 import { ActionPanel, List, Action, Icon, showToast, Toast, Clipboard } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { $fetch } from "ofetch";
-
-interface Module {
-  name: string;
-  npm: string;
-  description: string;
-  icon?: string;
-  github?: string;
-  website?: string;
-  category?: string;
-  maintainers?: {
-    name: string;
-    github: string;
-  }[];
-  compatibility?: {
-    nuxt: string;
-  };
-}
-
-interface ApiResponse {
-  modules: Module[]
-}
+import type { Module, ApiResponse } from "./types/modules.ts";
 
 export default function Command() {
   const [modules, setModules] = useState<Module[]>([]);
