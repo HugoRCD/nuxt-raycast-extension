@@ -21,6 +21,22 @@
           "name": "componentName",
           "type": "text",
           "placeholder": "button, input, etc..."
+        },
+        {
+          "name": "version",
+          "type": "dropdown",
+          "placeholder": "v3",
+          "required": false,
+          "data": [
+            {
+              "title": "v3",
+              "value": "v3"
+            },
+            {
+              "title": "v2",
+              "value": "v2"
+            }
+          ]
         }
       ]
     },

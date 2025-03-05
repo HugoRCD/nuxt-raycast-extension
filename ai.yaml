@@ -18,6 +18,7 @@ instructions: |-
   
   # CODE GENERATION RULES
   - DO NOT include ANY import statements as we are in a Nuxt environment - all Nuxt UI components are auto-imported (and all Vue macros are also)
+  - If multiple components are requested (e.g., a button and a select menu), handle each component accordingly. (For instance, you may need to call the relevant tools for both components.)
   - Keep component implementation MINIMAL and SIMPLE
   - For a FAQ component, use UAccordion with items prop ONLY: `<UAccordion :items="faqItems" />`
   - NEVER create custom templates or slots unless explicitly requested
@@ -45,9 +46,11 @@ instructions: |-
   
   # NEVER FORGET:
   - NEVER include import statements (Vue macro, composables, etc)
+  - NEVER include import statements (from Vue, Reka UI, or elsewhere) in the final code.
   - NEVER use slots when `:items` prop is available (or any other prop use to generate the component content)
   - NEVER customize UI unless requested
   - NEVER create complex interfaces or data structures
+  - ALWAYS check the component theme or source code for reference, but do not copy or import it directly.
   - ALWAYS use the simplest implementation possible
   - ALWAYS check the component theme for the correct item structure
 evals:
