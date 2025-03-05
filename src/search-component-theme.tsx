@@ -1,16 +1,16 @@
 import { LaunchProps, getSelectedText } from "@raycast/api";
-import { openDocumentation } from "./utils/component-utils";
+import { openDocumentation } from "./utils/component";
 import { sanitizeComponentName, getComponentInfo } from "./utils/components";
-import { getExtensionPreferences, showFailureToast, handleCommandError } from "./utils/command-utils";
+import { getExtensionPreferences, showFailureToast, handleCommandError } from "./utils/commands";
 
 /**
  * Main function to handle component theme search
  */
 export default async function SearchComponentTheme(props: LaunchProps<{ arguments: Arguments.SearchComponentTheme }>) {
   try {
-    const { prefix, version: preferenceVersion } = getExtensionPreferences();
+    const { prefix } = getExtensionPreferences();
+    const version = props.arguments?.version || getExtensionPreferences().version;
     const name = props.arguments?.componentName ?? (await getSelectedText());
-    const version = props.arguments?.version ?? preferenceVersion;
 
     if (!name) {
       await showFailureToast("Please select a component name");
@@ -42,8 +42,8 @@ export default async function SearchComponentTheme(props: LaunchProps<{ argument
       camelCaseName: sanitizedName
     };
 
-    // Open the theme documentation
-    await openDocumentation(componentItem, true);
+    // Open the theme documentation with the specified version
+    await openDocumentation(componentItem, true, version);
   } catch (error) {
     await handleCommandError(error, "Failed to open documentation");
   }

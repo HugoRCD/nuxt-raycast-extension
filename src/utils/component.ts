@@ -1,7 +1,8 @@
 import { Icon, open } from "@raycast/api";
 import type { ComponentContext } from "../types/components";
-import { sanitizeComponentName, getComponentInfo, buildDocumentationUrl } from "./components";
-import { getExtensionPreferences, showAnimatedToast, showFailureToast } from "./command-utils";
+import { getComponentInfo, buildDocumentationUrl } from "./components";
+import { getExtensionPreferences, showAnimatedToast, showFailureToast, showSuccessToast } from "./commands";
+import { pascalCase } from "scule";
 
 export interface ComponentItem {
   name: string;
@@ -25,13 +26,13 @@ export function getFormattedComponentName(component: ComponentItem): string {
   if (component.type === "base") {
     // For base components, add the prefix and capitalize each word
     // e.g., "dropdown-menu" -> "UDropdownMenu"
-    return prefix + component.name.split(/[-_]/).map(capitalizeFirstLetter).join("");
+    return prefix + pascalCase(component.camelCaseName);
   } else if (component.type === "prose") {
     // For prose components, add "Prose" prefix and capitalize
-    return "Prose" + capitalizeFirstLetter(component.name);
+    return "Prose" + capitalizeFirstLetter(component.camelCaseName);
   } else {
     // For pro components, just capitalize each word
-    return component.name.split(/[-_]/).map(capitalizeFirstLetter).join("");
+    return pascalCase(component.camelCaseName);
   }
 }
 
@@ -39,7 +40,7 @@ export function getFormattedComponentName(component: ComponentItem): string {
  * Helper function to get display name for the list (capitalized but without prefix)
  */
 export function getDisplayName(component: ComponentItem): string {
-  return capitalizeFirstLetter(component.name);
+  return capitalizeFirstLetter(component.camelCaseName);
 }
 
 /**
@@ -61,10 +62,15 @@ export function createComponentContext(component: ComponentItem): ComponentConte
 /**
  * Open documentation with or without the theme section
  */
-export async function openDocumentation(component: ComponentItem, showTheme: boolean = false): Promise<void> {
+export async function openDocumentation(
+  component: ComponentItem, 
+  showTheme: boolean = false,
+  version?: string
+): Promise<void> {
   try {
     const context = createComponentContext(component);
     const { version: preferenceVersion } = getExtensionPreferences();
+    const docVersion = version || preferenceVersion;
 
     if (!context.componentInfo.exists) {
       await showFailureToast("Component not found");
@@ -72,13 +78,14 @@ export async function openDocumentation(component: ComponentItem, showTheme: boo
     }
 
     // Build documentation URL and remove #theme if not needed
-    let documentationUrl = buildDocumentationUrl(context, preferenceVersion);
+    let documentationUrl = buildDocumentationUrl(context, docVersion);
     if (!showTheme) {
       documentationUrl = documentationUrl.replace(/#theme$/, "");
     }
 
-    await showAnimatedToast(`Opening ${showTheme ? "theme " : ""}documentation...`);
+    await showAnimatedToast(`Opening ${showTheme ? "theme " : ""}documentation (${docVersion})...`);
     await open(documentationUrl);
+    await showSuccessToast("Documentation opened successfully");
   } catch (error) {
     await showFailureToast("Failed to open documentation");
   }

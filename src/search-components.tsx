@@ -6,12 +6,12 @@ import {
   getDisplayName, 
   getFormattedComponentName, 
   openDocumentation 
-} from "./utils/component-utils";
+} from "./utils/component";
 import { 
   getAllComponents, 
   filterComponents, 
   sortComponentsByName 
-} from "./utils/search-utils";
+} from "./utils/search";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");

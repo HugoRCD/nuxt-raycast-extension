@@ -1,5 +1,6 @@
-import { ComponentItem } from "./component-utils";
+import { ComponentItem } from "./component";
 import { components, proComponents, proseComponents } from "./components-list";
+import { camelCase, kebabCase } from "scule";
 
 /**
  * Get all components from all categories
@@ -10,27 +11,27 @@ export function getAllComponents(): ComponentItem[] {
   // Add base components
   components.forEach((name: string) => {
     allComponents.push({
-      name,
+      name: kebabCase(name),
       type: "base",
-      camelCaseName: name.split(/[-_]/).map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(""),
+      camelCaseName: camelCase(name),
     });
   });
 
   // Add pro components
   proComponents.forEach((name: string) => {
     allComponents.push({
-      name,
+      name: kebabCase(name),
       type: "pro",
-      camelCaseName: name.split(/[-_]/).map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(""),
+      camelCaseName: name,
     });
   });
 
   // Add prose components
   proseComponents.forEach((name: string) => {
     allComponents.push({
-      name,
+      name: kebabCase(name),
       type: "prose",
-      camelCaseName: name.split(/[-_]/).map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(""),
+      camelCaseName: camelCase(name),
     });
   });
 
@@ -54,7 +55,10 @@ export function filterComponents(
     // Filter by search text
     if (searchText) {
       const normalizedSearchText = searchText.toLowerCase();
-      return component.name.toLowerCase().includes(normalizedSearchText);
+      return (
+        component.name.toLowerCase().includes(normalizedSearchText) ||
+        component.camelCaseName.toLowerCase().includes(normalizedSearchText)
+      );
     }
 
     return true;
