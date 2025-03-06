@@ -24,4 +24,4 @@ type Input = {
 export default async function tool(input: Input) {
   const url = `https://api.nuxt.com/modules/${input.name}`;
   return await $fetch<Module>(url);
-} 
+}

@@ -12,5 +12,5 @@ import { $fetch } from "ofetch";
  */
 export default async function tool() {
   const { categories } = await $fetch("https://api.nuxt.com/modules/categories");
-  return categories as string[]
+  return categories as string[];
 }

@@ -7,6 +7,7 @@ export interface Module {
   website: string;
   category: string;
   readme: string;
+  type: "official" | "3rd-party" | "community";
   maintainers?: {
     name: string;
     github: string;

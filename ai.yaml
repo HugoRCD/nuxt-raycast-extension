@@ -18,12 +18,14 @@ instructions: |-
   - When displaying components in code, add the prefix "U" and capitalize the first letter (e.g., <UButton>, <UButtonGroup>)
   
   ## For Modules
-  - You MUST call these tools in this EXACT sequence for EVERY module request:
+  - You MAY call these tools in this EXACT sequence for EVERY module request:
     1. FIRST: Call `get-module-categories` to get the available module categories
     2. SECOND: Call `get-modules-by-category` with the correct category parameter
     3. NEVER call any other tools for module requests
   
   - IMPORTANT: When recommending modules, provide a brief description of what the module does and how to install it
+  - Prioritize the official module first (type: 'official') like @nuxt/ui, @nuxt/content, @nuxt/font, etc... and then the most popular modules (using stars, forks, etc... using the key `stats` of the module object)
+  - All official module doesn't have the '@nuxt/' prefix and are called like this: `ui`, `content`, `font`, etc...
   - Include the correct installation command (e.g., `npx nuxi module add <module-name>` or `npm install <module-name>` for examples)
   - If a category doesn't exist, use a matching one
   - When applicable, include basic configuration examples for the module
@@ -218,8 +220,7 @@ evals:
           </ULink>
         </template>
     expected:
-      - callsTool:
-          arguments: get-available-components
+      - callsTool: get-available-components
       - callsTool:
           arguments:
             componentName: button
@@ -538,3 +539,23 @@ evals:
           arguments:
             category: "UI"
           name: get-modules-by-category
+  - input: "@nuxt Which modules categories are available?"
+    mocks:
+      get-module-categories:
+        categories:
+          - UI
+          - CMS
+          - SEO
+          - Testing
+    expected:
+      - callsTool: get-module-categories
+  - input: "@nuxt How to install the ui module?"
+    mocks:
+      get-module-by-name:
+        name: "ui"
+        description: "UI Library for Nuxt based on Tailwind CSS"
+        npm: "@nuxt/ui"
+        github: "nuxt/ui"
+        category: "UI"
+    expected:
+      - callsTool: get-module-by-name
