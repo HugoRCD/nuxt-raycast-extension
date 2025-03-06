@@ -1,6 +1,16 @@
 import { $fetch } from "ofetch";
 import type { Module } from "../types/modules.ts";
 
+type Input = {
+  /**
+   * The name of the module to fetch
+   * @example "ui"
+   * @example "algolia"
+   * @example "@nuxtjs/tailwindcss"
+   */
+  name: string;
+};
+
 /**
  * Fetch information about a specific Nuxt module by name
  *
@@ -9,10 +19,9 @@ import type { Module } from "../types/modules.ts";
  * - You want to check compatibility, maintainers, or other details of a module
  * - You need to provide specific information about a module to the user
  *
- * @param name - The name of the module (e.g., "ui", "algolia")
  * @returns The module information if found
  */
-export default async function tool(name: string) {
-  const url = `https://api.nuxt.com/modules/${name}`;
+export default async function tool(input: Input) {
+  const url = `https://api.nuxt.com/modules/${input.name}`;
   return await $fetch<Module>(url);
 } 

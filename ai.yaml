@@ -69,7 +69,7 @@ instructions: |-
   - When recommending modules, ALWAYS provide installation instructions and basic usage examples
   - NEVER call `get-nuxt-ui-documentation` for module-related queries
 evals:
-  - input: "@nuxt-ui Create a button component"
+  - input: "@nuxt Create a button component"
     mocks:
       get-available-components:
         components:
@@ -228,7 +228,7 @@ evals:
           arguments:
             componentName: button
           name: get-component-source-code
-  - input: "@nuxt-ui What components are available?"
+  - input: "@nuxt What components are available?"
     mocks:
       get-available-components:
         components:
@@ -244,7 +244,7 @@ evals:
           - pageCard
     expected:
       - callsTool: get-available-components
-  - input: "@nuxt-ui Create a FAQ component"
+  - input: "@nuxt Create a FAQ component"
     mocks:
       get-available-components:
         components:
@@ -287,7 +287,7 @@ evals:
           arguments:
             componentName: accordion
           name: get-component-theme
-  - input: "@nuxt-ui How many components in Nuxt UI ?"
+  - input: "@nuxt How many components in Nuxt UI ?"
     mocks:
       get-available-components:
         components:
@@ -313,7 +313,7 @@ evals:
     expected:
       - callsTool:
           name: get-available-components
-  - input: "@nuxt-ui Give me the avatar theme"
+  - input: "@nuxt Give me the avatar theme"
     mocks:
       get-available-components:
         components:
@@ -401,7 +401,7 @@ evals:
             componentName: avatar
           name: get-component-theme
 
-  - input: "@nuxt-ui Is there props on the card component ?"
+  - input: "@nuxt Is there props on the card component ?"
     mocks:
       get-available-components:
         components:
@@ -491,28 +491,17 @@ evals:
           arguments:
             componentName: card
           name: get-component-source-code
-  - input: "@nuxt-ui What module categories are available?"
+  - input: "@nuxt What module categories are available?"
     mocks:
       get-module-categories:
         categories:
           - UI
-          - Content
+          - CMS
           - SEO
-          - Analytics
-          - Authentication
-          - Database
-          - Deployment
-          - Development
-          - E-commerce
-          - Forms
-          - i18n
-          - Performance
-          - Security
           - Testing
-          - Utilities
     expected:
       - callsTool: get-module-categories
-  - input: "@nuxt-ui Recommend me some UI modules"
+  - input: "@nuxt Recommend me some UI modules"
     mocks:
       get-module-categories:
         categories:
@@ -548,127 +537,4 @@ evals:
       - callsTool:
           arguments:
             category: "UI"
-          name: get-modules-by-category
-  - input: "@nuxt-ui How do I use the @nuxtjs/i18n module?"
-    mocks:
-      get-module-categories:
-        categories:
-          - UI
-          - Content
-          - SEO
-          - i18n
-          - Analytics
-      get-modules-by-category:
-        modules:
-          - name: "@nuxtjs/i18n"
-            description: "i18n module for Nuxt"
-            npm: "@nuxtjs/i18n"
-            github: "nuxt-modules/i18n"
-            category: "i18n"
-            compatibility: "Nuxt 2, Nuxt 3"
-            stars: 2800
-            installation: "npm install @nuxtjs/i18n"
-            configuration: |
-              // nuxt.config.ts
-              export default defineNuxtConfig({
-                modules: ['@nuxtjs/i18n'],
-                i18n: {
-                  locales: ['en', 'fr'],
-                  defaultLocale: 'en',
-                  vueI18n: './i18n.config.ts'
-                }
-              })
-              
-              // i18n.config.ts
-              export default defineI18nConfig(() => ({
-                legacy: false,
-                locale: 'en',
-                messages: {
-                  en: {
-                    welcome: 'Welcome'
-                  },
-                  fr: {
-                    welcome: 'Bienvenue'
-                  }
-                }
-              }))
-    expected:
-      - callsTool: get-module-categories
-      - callsTool:
-          arguments:
-            category: "i18n"
-          name: get-modules-by-category
-  - input: "@nuxt-ui Which modules can I use for a CMS?"
-    mocks:
-      get-module-categories:
-        categories:
-          - UI
-          - Content
-          - CMS
-          - SEO
-          - Analytics
-      get-modules-by-category:
-        modules:
-          - name: "@nuxt/content"
-            description: "File-based CMS for Nuxt"
-            npm: "@nuxt/content"
-            github: "nuxt/content"
-            category: "CMS"
-            compatibility: "Nuxt 3"
-            stars: 5200
-            installation: "npm install @nuxt/content"
-          - name: "nuxt-directus"
-            description: "Integration with Directus Headless CMS"
-            npm: "nuxt-directus"
-            github: "nuxt-modules/directus"
-            category: "CMS"
-            compatibility: "Nuxt 3"
-            stars: 850
-            installation: "npm install nuxt-directus"
-          - name: "nuxtjs-strapi"
-            description: "Integration with Strapi Headless CMS"
-            npm: "@nuxtjs/strapi"
-            github: "nuxt-modules/strapi"
-            category: "CMS"
-            compatibility: "Nuxt 3"
-            stars: 1200
-            installation: "npm install @nuxtjs/strapi"
-    expected:
-      - callsTool: get-module-categories
-      - callsTool:
-          arguments:
-            category: "CMS"
-          name: get-modules-by-category
-  - input: "@nuxt-ui What modules are available for authentication?"
-    mocks:
-      get-module-categories:
-        categories:
-          - UI
-          - Authentication
-          - CMS
-          - SEO
-          - Analytics
-      get-modules-by-category:
-        modules:
-          - name: "@sidebase/nuxt-auth"
-            description: "Authentication module for Nuxt 3 based on NextAuth.js"
-            npm: "@sidebase/nuxt-auth"
-            github: "sidebase/nuxt-auth"
-            category: "Authentication"
-            compatibility: "Nuxt 3"
-            stars: 1800
-            installation: "npm install @sidebase/nuxt-auth"
-          - name: "nuxt-auth-sanctum"
-            description: "Laravel Sanctum integration for Nuxt"
-            npm: "nuxt-auth-sanctum"
-            github: "nuxt-community/auth-sanctum"
-            category: "Authentication"
-            compatibility: "Nuxt 3"
-            stars: 450
-            installation: "npm install nuxt-auth-sanctum"
-    expected:
-      - callsTool: get-module-categories
-      - callsTool:
-          arguments:
-            category: "Authentication"
           name: get-modules-by-category

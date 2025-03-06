@@ -1,6 +1,16 @@
 import { $fetch } from "ofetch";
 import type { ApiResponse } from "../types/modules.ts";
 
+type Input = {
+  /**
+   * The category to filter modules by
+   * @example "ui"
+   * @example "cms"
+   * @example "seo"
+   */
+  category: string;
+};
+
 /**
  * Fetch Nuxt modules filtered by category
  *
@@ -9,10 +19,9 @@ import type { ApiResponse } from "../types/modules.ts";
  * - You want to recommend modules from a particular category
  * - You need a more focused list of modules than the complete list
  *
- * @param category - The category to filter modules by (e.g., "ui", "cms", "seo")
  * @returns The list of modules in the specified category
  */
-export default async function tool(category: string) {
-  const url = `https://api.nuxt.com/modules?category=${category}`;
+export default async function tool(input: Input) {
+  const url = `https://api.nuxt.com/modules?category=${input.category}`;
   return await $fetch<ApiResponse>(url);
 } 
