@@ -11,5 +11,6 @@ import { $fetch } from "ofetch";
  * @returns The list of available module categories
  */
 export default async function tool() {
-  return await $fetch<string[]>("https://api.nuxt.com/modules/categories");
-} 
+  const { categories } = await $fetch("https://api.nuxt.com/modules/categories");
+  return categories as string[]
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "nuxt-ui",
-  "title": "Nuxt UI",
-  "description": "Supercharge your Nuxt UI workflow",
+  "name": "nuxt",
+  "title": "Nuxt",
+  "description": "Supercharge your Nuxt workflow",
   "icon": "icon.png",
   "author": "HugoRCD",
   "categories": [
@@ -55,11 +55,6 @@
   ],
   "tools": [
     {
-      "name": "get-nuxt-ui-documentation",
-      "title": "Get Nuxt UI Documentation",
-      "description": "Get the full Nuxt UI documentation in Markdown format."
-    },
-    {
       "name": "get-component-source-code",
       "title": "Get Component Source Code",
       "description": "Get the complete source code for a specified Nuxt UI component."
@@ -83,6 +78,11 @@
       "name": "get-modules-by-category",
       "title": "Get Modules by Category",
       "description": "Get the list of modules by category."
+    },
+    {
+      "name": "get-module-by-name",
+      "title": "Get Module by Name",
+      "description": "Get the module information by name."
     }
   ],
   "preferences": [
