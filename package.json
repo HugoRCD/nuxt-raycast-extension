@@ -48,8 +48,8 @@
     },
     {
       "name": "search-modules",
-      "title": "Search modules",
-      "description": "Search modules",
+      "title": "Search Modules",
+      "description": "Search within Nuxt modules ecosystem",
       "mode": "view"
     }
   ],
@@ -76,12 +76,12 @@
     },
     {
       "name": "get-modules-by-category",
-      "title": "Get Modules by Category",
+      "title": "Get Modules By Category",
       "description": "Get the list of modules by category."
     },
     {
       "name": "get-module-by-name",
-      "title": "Get Module by Name",
+      "title": "Get Module By Name",
       "description": "Get the module information by name."
     }
   ],
