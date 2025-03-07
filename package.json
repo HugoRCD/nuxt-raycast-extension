@@ -76,12 +76,12 @@
     },
     {
       "name": "get-modules-by-category",
-      "title": "Get Modules By Category",
+      "title": "Get Modules by Category",
       "description": "Get the list of modules by category."
     },
     {
       "name": "get-module-by-name",
-      "title": "Get Module By Name",
+      "title": "Get Module by Name",
       "description": "Get the module information by name."
     }
   ],
