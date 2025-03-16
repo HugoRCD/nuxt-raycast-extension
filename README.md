@@ -7,7 +7,7 @@ Made with 💚 for the Nuxt community
 
 ---
 
-<a title="Install Nuxt Raycast Extension" href="https://www.raycast.com/HugoRCD/nuxt-ui"><img src="https://www.raycast.com/HugoRCD/nuxt-ui/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;"></a>
+<a title="Install Nuxt Raycast Extension" href="https://www.raycast.com/HugoRCD/nuxt"><img src="https://www.raycast.com/HugoRCD/nuxt/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;"></a>
 
 </div>
 
