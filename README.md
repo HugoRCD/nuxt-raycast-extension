@@ -81,6 +81,20 @@ This is just the beginning. Here's what's coming:
 
 Got ideas to make this even better? Issues and PRs are welcome!
 
+<!-- automd:fetch url="gh:hugorcd/markdown/main/src/sponsors.md" -->
+
+## Sponsors
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/hugorcd/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/hugorcd/static/sponsors.svg' alt="HugoRCD sponsors" />
+  </a>
+</p>
+
+<!-- /automd -->
+
+## Contributors
+
 <!-- automd:contributors license=Apache github=HugoRCD/nuxt-ui-raycast-extension" -->
 
 Published under the [APACHE](https://github.com/HugoRCD/nuxt-ui-raycast-extension"/blob/main/LICENSE) license.
@@ -96,6 +110,6 @@ Made by [community](https://github.com/HugoRCD/nuxt-ui-raycast-extension"/graphs
 
 ---
 
-_🤖 auto updated with [automd](https://automd.unjs.io) (last updated: Wed Mar 06 2024)_
+_🤖 auto updated with [automd](https://automd.unjs.io) (last updated: Mon Mar 31 2025)_
 
 <!-- /automd -->
