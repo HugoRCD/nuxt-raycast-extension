@@ -86,7 +86,7 @@ Got ideas to make this even better? Issues and PRs are welcome!
 ## Sponsors
 
 <p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/hugorcd/static/sponsors.svg">
+  <a href="https://github.com/sponsors/HugoRCD">
     <img src='https://cdn.jsdelivr.net/gh/hugorcd/static/sponsors.svg' alt="HugoRCD sponsors" />
   </a>
 </p>
@@ -95,13 +95,12 @@ Got ideas to make this even better? Issues and PRs are welcome!
 
 ## Contributors
 
-<!-- automd:contributors license=Apache github=HugoRCD/nuxt-ui-raycast-extension" -->
+<!-- automd:contributors github="HugoRCD/nuxt-raycast-extension" -->
 
-Published under the [APACHE](https://github.com/HugoRCD/nuxt-ui-raycast-extension"/blob/main/LICENSE) license.
-Made by [community](https://github.com/HugoRCD/nuxt-ui-raycast-extension"/graphs/contributors) 💛
+Made by [community](https://github.com/HugoRCD/nuxt-raycast-extension/graphs/contributors) 💛
 <br><br>
-<a href="https://github.com/HugoRCD/nuxt-ui-raycast-extension"/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=HugoRCD/nuxt-ui-raycast-extension"" />
+<a href="https://github.com/HugoRCD/nuxt-raycast-extension/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=HugoRCD/nuxt-raycast-extension" />
 </a>
 
 <!-- /automd -->
@@ -110,6 +109,6 @@ Made by [community](https://github.com/HugoRCD/nuxt-ui-raycast-extension"/graphs
 
 ---
 
-_🤖 auto updated with [automd](https://automd.unjs.io) (last updated: Mon Mar 31 2025)_
+_🤖 auto updated with [automd](https://automd.unjs.io) (last updated: Tue May 06 2025)_
 
 <!-- /automd -->
