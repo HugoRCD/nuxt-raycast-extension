@@ -1,7 +1,8 @@
-import { Icon, open } from "@raycast/api";
+import { Icon, open, showToast, Toast } from "@raycast/api";
 import type { ComponentContext } from "../types/components";
 import { getComponentInfo, buildDocumentationUrl } from "./components";
-import { getExtensionPreferences, showAnimatedToast, showFailureToast, showSuccessToast } from "./commands";
+import { getExtensionPreferences, showAnimatedToast, showSuccessToast } from "./commands";
+import { showFailureToast } from "@raycast/utils";
 import { pascalCase } from "scule";
 
 export interface ComponentItem {
@@ -73,7 +74,7 @@ export async function openDocumentation(
     const docVersion = version || preferenceVersion;
 
     if (!context.componentInfo.exists) {
-      await showFailureToast("Component not found");
+      await showToast(Toast.Style.Failure, "Component not found");
       return;
     }
 
@@ -87,7 +88,7 @@ export async function openDocumentation(
     await open(documentationUrl);
     await showSuccessToast("Documentation opened successfully");
   } catch (error) {
-    await showFailureToast("Failed to open documentation");
+    await showFailureToast(error, { title: "Failed to open documentation" });
   }
 }
 
