@@ -1,13 +1,13 @@
-import { Icon, open, showToast, Toast } from "@raycast/api";
+import { Icon, open, showToast, Toast, getPreferenceValues } from "@raycast/api";
 import type { ComponentContext } from "../types/components";
 import { getComponentInfo, buildDocumentationUrl } from "./components";
-import { getExtensionPreferences, showAnimatedToast, showSuccessToast } from "./commands";
+import { showAnimatedToast, showSuccessToast } from "./commands";
 import { showFailureToast } from "@raycast/utils";
 import { pascalCase } from "scule";
 
 export interface ComponentItem {
   name: string;
-  type: "base" | "pro" | "prose";
+  type: "base" | "prose";
   camelCaseName: string;
 }
 
@@ -22,7 +22,7 @@ export function capitalizeFirstLetter(string: string): string {
  * Helper function to get properly formatted component name with prefix
  */
 export function getFormattedComponentName(component: ComponentItem): string {
-  const { prefix } = getExtensionPreferences();
+  const { prefix } = getPreferenceValues();
 
   if (component.type === "base") {
     // For base components, add the prefix and capitalize each word
@@ -63,15 +63,9 @@ export function createComponentContext(component: ComponentItem): ComponentConte
 /**
  * Open documentation with or without the theme section
  */
-export async function openDocumentation(
-  component: ComponentItem,
-  showTheme: boolean = false,
-  version?: string,
-): Promise<void> {
+export async function openDocumentation(component: ComponentItem, showTheme: boolean = false): Promise<void> {
   try {
     const context = createComponentContext(component);
-    const { version: preferenceVersion } = getExtensionPreferences();
-    const docVersion = version || preferenceVersion;
 
     if (!context.componentInfo.exists) {
       await showToast(Toast.Style.Failure, "Component not found");
@@ -79,12 +73,12 @@ export async function openDocumentation(
     }
 
     // Build documentation URL and remove #theme if not needed
-    let documentationUrl = buildDocumentationUrl(context, docVersion);
+    let documentationUrl = buildDocumentationUrl(context);
     if (!showTheme) {
       documentationUrl = documentationUrl.replace(/#theme$/, "");
     }
 
-    await showAnimatedToast(`Opening ${showTheme ? "theme " : ""}documentation (${docVersion})...`);
+    await showAnimatedToast(`Opening ${showTheme ? "theme " : ""}documentation...`);
     await open(documentationUrl);
     await showSuccessToast("Documentation opened successfully");
   } catch (error) {
@@ -99,8 +93,6 @@ export function getComponentIcon(type: ComponentItem["type"]): Icon {
   switch (type) {
     case "base":
       return Icon.Box;
-    case "pro":
-      return Icon.Star;
     case "prose":
       return Icon.Text;
     default:
@@ -115,8 +107,6 @@ export function getComponentTypeLabel(type: ComponentItem["type"]): string {
   switch (type) {
     case "base":
       return "Base Component";
-    case "pro":
-      return "Pro Component";
     case "prose":
       return "Prose Component";
     default:

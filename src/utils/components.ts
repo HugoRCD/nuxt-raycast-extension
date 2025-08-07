@@ -1,7 +1,7 @@
 import { camelCase, kebabCase } from "scule";
 import type { ComponentInfo, ComponentContext } from "../types/components";
-import { components, proComponents, proseComponents } from "./components-list";
-import { V2_URL, V3_URL } from "./search";
+import { components, proseComponents } from "./components-list";
+import { V3_URL } from "./search";
 
 /**
  * Cleans and normalizes a component name
@@ -20,13 +20,11 @@ export function getComponentInfo(sanitizedName: string): ComponentInfo {
   const camelCaseName = camelCase(sanitizedName);
 
   const isBase = components.includes(camelCaseName);
-  const isPro = proComponents.includes(camelCaseName);
   const isProse = proseComponents.includes(camelCaseName);
 
   return {
-    exists: isBase || isPro || isProse,
+    exists: isBase || isProse,
     isBase,
-    isPro,
     isProse,
   };
 }
@@ -34,12 +32,9 @@ export function getComponentInfo(sanitizedName: string): ComponentInfo {
 /**
  * Builds the documentation URL based on component info and preferences
  */
-export function buildDocumentationUrl(context: ComponentContext, version: string): string {
+export function buildDocumentationUrl(context: ComponentContext): string {
   const { sanitizedName, hasProsePrefix, componentInfo } = context;
-  const { isBase, isPro, isProse } = componentInfo;
-
-  const baseUrl = version === "v3" ? V3_URL : V2_URL;
-  const versionUrl = isPro && version === "v2" ? `${baseUrl}/pro` : baseUrl;
+  const { isBase, isProse } = componentInfo;
 
   if (hasProsePrefix) {
     return `${V3_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
@@ -49,5 +44,5 @@ export function buildDocumentationUrl(context: ComponentContext, version: string
     return `${V3_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
   }
 
-  return `${versionUrl}/components/${sanitizedName}#theme`;
+  return `${V3_URL}/components/${sanitizedName}#theme`;
 }
