@@ -50,7 +50,7 @@ Access Nuxt UI documentation and tools instantly:
 Customize to match your workflow:
 - Configure component prefixes to match your project style
 - Set up shortcuts for your most-used commands
-- Seamless support for both Nuxt UI v2 and v3
+- Seamless support for Nuxt UI
 
 ## 🎬 See It In Action
 

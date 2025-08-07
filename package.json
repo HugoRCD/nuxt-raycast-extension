@@ -21,22 +21,6 @@
           "name": "componentName",
           "type": "text",
           "placeholder": "button, input, etc..."
-        },
-        {
-          "name": "version",
-          "type": "dropdown",
-          "placeholder": "v3",
-          "required": false,
-          "data": [
-            {
-              "title": "v3",
-              "value": "v3"
-            },
-            {
-              "title": "v2",
-              "value": "v2"
-            }
-          ]
         }
       ]
     },
@@ -55,9 +39,9 @@
   ],
   "tools": [
     {
-      "name": "get-component-source-code",
-      "title": "Get Component Source Code",
-      "description": "Get the complete source code for a specified Nuxt UI component."
+      "name": "get-component-documentation",
+      "title": "Get Component Documentation",
+      "description": "Get the complete documentation for a specified Nuxt UI component."
     },
     {
       "name": "get-component-theme",
@@ -94,25 +78,6 @@
       "placeholder": "U",
       "required": false,
       "default": "U"
-    },
-    {
-      "name": "version",
-      "title": "Documentation Version",
-      "type": "dropdown",
-      "description": "The version of Nuxt UI you want to use",
-      "placeholder": "v3",
-      "required": false,
-      "default": "v3",
-      "data": [
-        {
-          "title": "v3",
-          "value": "v3"
-        },
-        {
-          "title": "v2",
-          "value": "v2"
-        }
-      ]
     }
   ],
   "dependencies": {

@@ -17,9 +17,9 @@ type Input = {
  * @returns The component's theme configuration as a string
  */
 export default async function tool(input: Input) {
-  const { version, prefix } = getPreferenceValues<Preferences>();
+  const { prefix } = getPreferenceValues();
   return await $fetch(
-    `https://raw.githubusercontent.com/nuxt/ui/refs/heads/${version}/src/theme/${sanitizeComponentName(input.componentName, prefix)}.ts`,
+    `https://raw.githubusercontent.com/nuxt/ui/refs/heads/main/src/theme/${sanitizeComponentName(input.componentName, prefix ?? "U")}.ts`,
     {
       method: "GET",
       headers: {

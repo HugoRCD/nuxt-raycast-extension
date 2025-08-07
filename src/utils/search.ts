@@ -1,5 +1,5 @@
 import { ComponentItem } from "./component";
-import { components, proComponents, proseComponents } from "./components-list";
+import { components, proseComponents } from "./components-list";
 import { camelCase, kebabCase } from "scule";
 
 /**
@@ -13,15 +13,6 @@ export function getAllComponents(): ComponentItem[] {
     allComponents.push({
       name: kebabCase(name),
       type: "base",
-      camelCaseName: camelCase(name),
-    });
-  });
-
-  // Add pro components
-  proComponents.forEach((name: string) => {
-    allComponents.push({
-      name: kebabCase(name),
-      type: "pro",
       camelCaseName: camelCase(name),
     });
   });
@@ -73,4 +64,3 @@ export function sortComponentsByName(components: ComponentItem[]): ComponentItem
 }
 
 export const V3_URL = "https://ui.nuxt.com";
-export const V2_URL = "https://ui2.nuxt.com";
