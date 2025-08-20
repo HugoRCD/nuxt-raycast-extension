@@ -1,4 +1,5 @@
 import { $fetch } from "ofetch";
+import { DOCS_URL } from "../utils/search";
 
 type Input = {
   /**
@@ -20,7 +21,7 @@ export default async function tool(input: Input) {
   // Convert first letter to uppercase for the API call
   const componentName = input.componentName.charAt(0).toUpperCase() + input.componentName.slice(1);
 
-  return await $fetch(`https://ui.nuxt.com/raw/components/${componentName}.md`, {
+  return await $fetch(`${DOCS_URL}/raw/components/${componentName}.md`, {
     method: "GET",
     headers: {
       "Content-Type": "text/plain",

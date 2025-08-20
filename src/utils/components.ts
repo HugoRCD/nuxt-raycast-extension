@@ -1,7 +1,7 @@
 import { camelCase, kebabCase } from "scule";
 import type { ComponentInfo, ComponentContext } from "../types/components";
 import { components, proseComponents } from "./components-list";
-import { V3_URL } from "./search";
+import { DOCS_URL } from "./search";
 
 /**
  * Cleans and normalizes a component name
@@ -37,12 +37,12 @@ export function buildDocumentationUrl(context: ComponentContext): string {
   const { isBase, isProse } = componentInfo;
 
   if (hasProsePrefix) {
-    return `${V3_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
+    return `${DOCS_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
   }
 
   if (isProse && !isBase) {
-    return `${V3_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
+    return `${DOCS_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
   }
 
-  return `${V3_URL}/components/${sanitizedName}#theme`;
+  return `${DOCS_URL}/components/${sanitizedName}#theme`;
 }

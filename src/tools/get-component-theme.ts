@@ -1,6 +1,7 @@
 import { $fetch } from "ofetch";
 import { getPreferenceValues } from "@raycast/api";
 import { sanitizeComponentName } from "../utils/components";
+import { BRANCH } from "../utils/search";
 
 type Input = {
   /**
@@ -19,7 +20,7 @@ type Input = {
 export default async function tool(input: Input) {
   const { prefix } = getPreferenceValues();
   return await $fetch(
-    `https://raw.githubusercontent.com/nuxt/ui/refs/heads/main/src/theme/${sanitizeComponentName(input.componentName, prefix ?? "U")}.ts`,
+    `https://raw.githubusercontent.com/nuxt/ui/refs/heads/${BRANCH}/src/theme/${sanitizeComponentName(input.componentName, prefix ?? "U")}.ts`,
     {
       method: "GET",
       headers: {

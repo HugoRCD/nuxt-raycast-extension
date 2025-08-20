@@ -63,4 +63,5 @@ export function sortComponentsByName(components: ComponentItem[]): ComponentItem
   return [...components].sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export const V3_URL = "https://ui.nuxt.com";
+export const DOCS_URL = "https://ui4.nuxt.com";
+export const BRANCH = "v4";
