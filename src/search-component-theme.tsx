@@ -1,6 +1,5 @@
 import { LaunchProps, Toast, getSelectedText, showToast, getPreferenceValues } from "@raycast/api";
-import { openDocumentation } from "./utils/component";
-import { sanitizeComponentName, getComponentInfo } from "./utils/components";
+import { openDocumentation, sanitizeComponentName, getComponentInfo } from "./utils/components";
 import { handleCommandError } from "./utils/commands";
 
 /**

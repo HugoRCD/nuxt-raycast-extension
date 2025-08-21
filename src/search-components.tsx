@@ -6,7 +6,7 @@ import {
   getDisplayName,
   getFormattedComponentName,
   openDocumentation,
-} from "./utils/component";
+} from "./utils/components";
 import { getAllComponents, filterComponents, sortComponentsByName } from "./utils/search";
 import { showFailureToast } from "@raycast/utils";
 

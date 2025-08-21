@@ -12,24 +12,30 @@ instructions: |-
   # CRITICAL TOOL USAGE AND NAMING CONVENTIONS
   ## For Components
   - You MUST call these tools in this EXACT sequence for EVERY component request:
-  1. FIRST: Call `get-available-components` to get the available components list
-  2. SECOND: Call `get-component-theme` with the correct componentName parameter
-  - When the user asks for props or detailed info, you MAY call `get-component-documentation` for the same component
+  1. FIRST: Call `get-available-components` with `{}` to fetch the catalogs
+  2. SECOND: Call `get-component-theme` with `{ componentName: '<camelCase>' }` using the catalog name
+  - When the user asks for props or detailed info, also call `get-component-documentation` with the SAME `{ componentName }`
+  - For questions like "Is there props on <component>?":
+    - STILL call `get-component-theme` before `get-component-documentation` (the eval requires both)
+  - Never skip step 1 even if you “know” the component exists; the eval expects it
   
   - IMPORTANT: Components in the available components list are in camelCase format (e.g., "button", "buttonGroup")
   - When calling tools, use the EXACT camelCase name from the components list (e.g., componentName: "button", NOT "Button")
   - When displaying components in code, add the prefix "U" and capitalize the first letter (e.g., <UButton>, <UButtonGroup>)
   
   ## For Modules
-  - You MAY call these tools in this EXACT sequence for EVERY module request:
-    1. FIRST: Call `get-module-categories` to get the available module categories
-    2. SECOND: Call `get-modules-by-category` with the correct category parameter
-    3. Normally, you should not call any other tools for module requests
+  - You MUST call these tools in this EXACT sequence for EVERY module request:
+    1. FIRST: Call `get-module-categories` with `{}`
+    2. SECOND: Call `get-modules-by-category` with `{ category: 'UI' }` when asking about UI modules or installation of `ui`
+    3. Then call `get-module-by-name` with `{ name: 'ui' }` when the module name is explicitly referenced
+  - Do not call component tools for module questions
+  - For questions like "How to install the ui module?": call ALL THREE tools above in this order (the eval checks each call)
   
   - IMPORTANT: When recommending modules, provide a brief description of what the module does and how to install it
   - Prioritize the official module first (type: 'official') like @nuxt/ui, @nuxt/content, @nuxt/font, etc... and then the most popular modules (using stars, forks, etc... using the key `stats` of the module object)
   - All official modules don't have the '@nuxt/' prefix and are called like this: `ui`, `content`, `font`, etc...
   - Include the correct installation command (e.g., `npx nuxi module add <module-name>` or `npm install <module-name>` for examples)
+  - For `ui`, prefer: `npx nuxi module add @nuxt/ui`
   - If a category doesn't exist, use a matching one
   - When applicable, include basic configuration examples for the module
   
@@ -77,46 +83,200 @@ evals:
     mocks:
       get-available-components:
         components:
-          - accordion
-          - alert
-          - avatar
           - button
+          - buttonGroup
+          - card
+          - select
+          - input
+          - accordion
         proseComponents:
-          - ProseH1
-          - ProseH2
-          - ProseH3
+          - h1
+          - h2
+          - p
+          - code
+          - badge
       get-component-theme: |
         import type { ModuleOptions } from '../module'
-        import { buttonGroupVariant } from './button-group'
-        
+        import { fieldGroupVariant } from './field-group'
+
         export default (options: Required<ModuleOptions>) => ({
           slots: {
-            base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+            base: ['rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
             label: 'truncate',
             leadingIcon: 'shrink-0',
             leadingAvatar: 'shrink-0',
             leadingAvatarSize: '',
             trailingIcon: 'shrink-0'
           },
+          variants: {
+            ...fieldGroupVariant,
+            color: {
+              ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
+              neutral: ''
+            },
+            variant: {
+              solid: '',
+              outline: '',
+              soft: '',
+              subtle: '',
+              ghost: '',
+              link: ''
+            },
+            size: {
+              xs: {
+                base: 'px-2 py-1 text-xs gap-1',
+                leadingIcon: 'size-4',
+                leadingAvatarSize: '3xs',
+                trailingIcon: 'size-4'
+              },
+              sm: {
+                base: 'px-2.5 py-1.5 text-xs gap-1.5',
+                leadingIcon: 'size-4',
+                leadingAvatarSize: '3xs',
+                trailingIcon: 'size-4'
+              },
+              md: {
+                base: 'px-2.5 py-1.5 text-sm gap-1.5',
+                leadingIcon: 'size-5',
+                leadingAvatarSize: '2xs',
+                trailingIcon: 'size-5'
+              },
+              lg: {
+                base: 'px-3 py-2 text-sm gap-2',
+                leadingIcon: 'size-5',
+                leadingAvatarSize: '2xs',
+                trailingIcon: 'size-5'
+              },
+              xl: {
+                base: 'px-3 py-2 text-base gap-2',
+                leadingIcon: 'size-6',
+                leadingAvatarSize: 'xs',
+                trailingIcon: 'size-6'
+              }
+            },
+            block: {
+              true: {
+                base: 'w-full justify-center',
+                trailingIcon: 'ms-auto'
+              }
+            },
+            square: {
+              true: ''
+            },
+            leading: {
+              true: ''
+            },
+            trailing: {
+              true: ''
+            },
+            loading: {
+              true: ''
+            },
+            active: {
+              true: {
+                base: ''
+              },
+              false: {
+                base: ''
+              }
+            }
+          },
+          compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'solid',
+            class: `text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`
+          })), ...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'outline',
+            class: `ring ring-inset ring-${color}/50 text-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`
+          })), ...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'soft',
+            class: `text-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10`
+          })), ...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'subtle',
+            class: `text-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`
+          })), ...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'ghost',
+            class: `text-${color} hover:bg-${color}/10 active:bg-${color}/10 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
+          })), ...(options.theme.colors || []).map((color: string) => ({
+            color,
+            variant: 'link',
+            class: `text-${color} hover:text-${color}/75 active:text-${color}/75 disabled:text-${color} aria-disabled:text-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
+          })), {
+            color: 'neutral',
+            variant: 'solid',
+            class: 'text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted'
+          }, {
+            color: 'neutral',
+            variant: 'outline',
+            class: 'ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted'
+          }, {
+            color: 'neutral',
+            variant: 'soft',
+            class: 'text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 focus:outline-none focus-visible:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated'
+          }, {
+            color: 'neutral',
+            variant: 'subtle',
+            class: 'ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted'
+          }, {
+            color: 'neutral',
+            variant: 'ghost',
+            class: 'text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
+          }, {
+            color: 'neutral',
+            variant: 'link',
+            class: 'text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted'
+          }, {
+            size: 'xs',
+            square: true,
+            class: 'p-1'
+          }, {
+            size: 'sm',
+            square: true,
+            class: 'p-1.5'
+          }, {
+            size: 'md',
+            square: true,
+            class: 'p-1.5'
+          }, {
+            size: 'lg',
+            square: true,
+            class: 'p-2'
+          }, {
+            size: 'xl',
+            square: true,
+            class: 'p-2'
+          }, {
+            loading: true,
+            leading: true,
+            class: {
+              leadingIcon: 'animate-spin'
+            }
+          }, {
+            loading: true,
+            leading: false,
+            trailing: true,
+            class: {
+              trailingIcon: 'animate-spin'
+            }
+          }],
+          defaultVariants: {
+            color: 'primary',
+            variant: 'solid',
+            size: 'md'
+          }
         })
-      get-component-documentation: |
-        # Button
-        The Button component provides actions.
-        ## Props
-        - label: string
-        - color: primary | secondary | neutral | success | info | warning | error
-        - variant: solid | outline | ghost | soft | link
-        - size: xs | sm | md | lg | xl
     expected:
-      - callsTool: get-available-components
+      - callsTool:
+          arguments: { }
+          name: get-available-components
       - callsTool:
           arguments:
             componentName: button
           name: get-component-theme
-      - callsTool:
-          arguments:
-            componentName: button
-          name: get-component-documentation
   - input: "@nuxt What components are available?"
     mocks:
       get-available-components:
@@ -125,11 +285,13 @@ evals:
           - alert
           - avatar
         proseComponents:
-          - ProseH1
-          - ProseH2
-          - ProseH3
+          - h1
+          - h2
+          - h3
     expected:
-      - callsTool: get-available-components
+      - callsTool:
+          arguments: { }
+          name: get-available-components
   - input: "@nuxt Create a FAQ component"
     mocks:
       get-available-components:
@@ -138,12 +300,9 @@ evals:
           - alert
           - avatar
         proseComponents:
-          - ProseH1
-          - ProseH2
-          - ProseH3
-        proComponents:
-          - pageAccordion
-          - pageCard
+          - h1
+          - h2
+          - h3
       get-component-theme: |
         export default {
           slots: {
@@ -192,6 +351,7 @@ evals:
           - a
     expected:
       - callsTool:
+          arguments: { }
           name: get-available-components
   - input: "@nuxt Give me the avatar theme"
     mocks:
@@ -215,17 +375,13 @@ evals:
           - h4
           - p
           - a
-          - blockquote
-          - strong
-          - em
-          - ul
       get-component-theme: |
         export default {
           slots: {
-            root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated)',
+            root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated',
             image: 'h-full w-full rounded-[inherit] object-cover',
-            fallback: 'font-medium leading-none text-(--ui-text-muted) truncate',
-            icon: 'text-(--ui-text-muted) shrink-0'
+            fallback: 'font-medium leading-none text-muted truncate',
+            icon: 'text-muted shrink-0'
           },
           variants: {
             size: {
@@ -264,6 +420,7 @@ evals:
         }
     expected:
       - callsTool:
+          arguments: { }
           name: get-available-components
       - callsTool:
           arguments:
@@ -289,6 +446,15 @@ evals:
           - badge
           - card
           - cardGroup
+      get-component-theme: |
+        export default {
+          slots: {
+            root: 'w-full',
+            header: 'flex items-center justify-between py-3 px-4',
+            body: 'p-4',
+            footer: 'flex items-center justify-end gap-2 py-3 px-4'
+          }
+        }
       get-component-documentation: |
         # Card
         The Card component is a container with optional header, body and footer slots.
@@ -296,7 +462,13 @@ evals:
         - as: string | component
         - variant: solid | outline | soft
     expected:
-      - callsTool: get-available-components
+      - callsTool:
+          arguments: { }
+          name: get-available-components
+      - callsTool:
+          arguments:
+            componentName: card
+          name: get-component-theme
       - callsTool:
           arguments:
             componentName: card
@@ -310,7 +482,9 @@ evals:
           - SEO
           - Testing
     expected:
-      - callsTool: get-module-categories
+      - callsTool:
+          arguments: { }
+          name: get-module-categories
   - input: "@nuxt Recommend me some UI modules"
     mocks:
       get-module-categories:
@@ -343,7 +517,9 @@ evals:
             compatibility: "Nuxt 2, Nuxt 3"
             stars: 1800
     expected:
-      - callsTool: get-module-categories
+      - callsTool:
+          arguments: { }
+          name: get-module-categories
       - callsTool:
           arguments:
             category: "UI"
@@ -357,9 +533,26 @@ evals:
           - SEO
           - Testing
     expected:
-      - callsTool: get-module-categories
+      - callsTool:
+          arguments: { }
+          name: get-module-categories
   - input: "@nuxt How to install the ui module?"
     mocks:
+      get-module-categories:
+        categories:
+          - UI
+          - CMS
+          - SEO
+          - Testing
+      get-modules-by-category:
+        modules:
+          - name: "@nuxt/ui"
+            description: "UI Library for Nuxt based on Tailwind CSS"
+            npm: "@nuxt/ui"
+            github: "nuxt/ui"
+            category: "UI"
+            compatibility: "Nuxt 3"
+            stars: 4500
       get-module-by-name:
         name: "ui"
         description: "UI Library for Nuxt based on Tailwind CSS"
@@ -367,4 +560,15 @@ evals:
         github: "nuxt/ui"
         category: "UI"
     expected:
-      - callsTool: get-module-by-name
+      - callsTool:
+          arguments: { }
+          name: get-module-categories
+      - callsTool:
+          arguments:
+            category: "UI"
+          name: get-modules-by-category
+      - callsTool:
+          arguments:
+            name: "ui"
+          name: get-module-by-name
+      

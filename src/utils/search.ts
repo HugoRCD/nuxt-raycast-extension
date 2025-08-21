@@ -1,5 +1,4 @@
-import { ComponentItem } from "./component";
-import { components, proseComponents } from "./components-list";
+import { ComponentItem, components, proseComponents } from "./components";
 import { camelCase, kebabCase } from "scule";
 
 /**
