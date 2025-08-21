@@ -78,6 +78,24 @@
       "placeholder": "U",
       "required": false,
       "default": "U"
+    },
+    {
+      "name": "docsUrl",
+      "title": "Docs URL",
+      "type": "textfield",
+      "description": "Base URL for Nuxt UI docs (no trailing slash)",
+      "placeholder": "https://ui.nuxt.com",
+      "required": false,
+      "default": "https://ui.nuxt.com"
+    },
+    {
+      "name": "branch",
+      "title": "UI Branch",
+      "type": "textfield",
+      "description": "nuxt/ui GitHub branch or ref used to fetch theme files",
+      "placeholder": "main",
+      "required": false,
+      "default": "main"
     }
   ],
   "dependencies": {

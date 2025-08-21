@@ -1,5 +1,6 @@
 import { ComponentItem, components, proseComponents } from "./components";
 import { camelCase, kebabCase } from "scule";
+import { getPreferenceValues } from "@raycast/api";
 
 /**
  * Get all components from all categories
@@ -62,5 +63,12 @@ export function sortComponentsByName(components: ComponentItem[]): ComponentItem
   return [...components].sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export const DOCS_URL = "https://ui4.nuxt.com";
-export const BRANCH = "v4";
+type Preferences = {
+  docsUrl?: string;
+  branch?: string;
+};
+
+const prefs = getPreferenceValues<Preferences>();
+
+export const DOCS_URL = (prefs.docsUrl || "https://ui.nuxt.com").replace(/\/$/, "");
+export const BRANCH = prefs.branch || "main";
