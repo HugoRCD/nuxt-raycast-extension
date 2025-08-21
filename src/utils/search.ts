@@ -1,6 +1,6 @@
-import { ComponentItem } from "./component";
-import { components, proComponents, proseComponents } from "./components-list";
+import { ComponentItem, components, proseComponents } from "./components";
 import { camelCase, kebabCase } from "scule";
+import { getPreferenceValues } from "@raycast/api";
 
 /**
  * Get all components from all categories
@@ -13,15 +13,6 @@ export function getAllComponents(): ComponentItem[] {
     allComponents.push({
       name: kebabCase(name),
       type: "base",
-      camelCaseName: camelCase(name),
-    });
-  });
-
-  // Add pro components
-  proComponents.forEach((name: string) => {
-    allComponents.push({
-      name: kebabCase(name),
-      type: "pro",
       camelCaseName: camelCase(name),
     });
   });
@@ -72,5 +63,12 @@ export function sortComponentsByName(components: ComponentItem[]): ComponentItem
   return [...components].sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export const V3_URL = "https://ui.nuxt.com";
-export const V2_URL = "https://ui2.nuxt.com";
+type Preferences = {
+  docsUrl?: string;
+  branch?: string;
+};
+
+const prefs = getPreferenceValues<Preferences>();
+
+export const DOCS_URL = (prefs.docsUrl || "https://ui.nuxt.com").replace(/\/$/, "");
+export const BRANCH = prefs.branch || "main";

@@ -6,7 +6,7 @@ import {
   getDisplayName,
   getFormattedComponentName,
   openDocumentation,
-} from "./utils/component";
+} from "./utils/components";
 import { getAllComponents, filterComponents, sortComponentsByName } from "./utils/search";
 import { showFailureToast } from "@raycast/utils";
 
@@ -36,7 +36,6 @@ export default function Command() {
         <List.Dropdown tooltip="Filter by Type" value={selectedType || ""} onChange={setSelectedType}>
           <List.Dropdown.Item title="All Types" value="" />
           <List.Dropdown.Item title="Base Components" value="base" />
-          <List.Dropdown.Item title="Pro Components" value="pro" />
           <List.Dropdown.Item title="Prose Components" value="prose" />
         </List.Dropdown>
       }
