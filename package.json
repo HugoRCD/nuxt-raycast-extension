@@ -50,6 +50,16 @@
       "description": "Get the complete documentation for a specified Nuxt UI component."
     },
     {
+      "name": "get-nuxt-documentation-by-path",
+      "title": "Get Nuxt Documentation by Path",
+      "description": "Fetch raw markdown of a Nuxt docs page by relative path."
+    },
+    {
+      "name": "get-nuxt-docs-page-list",
+      "title": "Get Nuxt Docs Page List",
+      "description": "List Nuxt docs pages. Pass { flat: true } to get all { title, path }."
+    },
+    {
       "name": "get-component-theme",
       "title": "Get Component Theme",
       "description": "Get the complete theme (use to customize the component through the `:ui` prop) for a specified Nuxt UI component."

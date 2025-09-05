@@ -5,10 +5,10 @@ instructions: |-
   - NEVER use slots unless explicitly requested by the user
   - NEVER customize UI with the `:ui` prop unless explicitly requested
   - NEVER create complex interfaces or data structures - use the exact structure from the documentation
-  
+
   # NUXT UI ASSUMPTIONS
   - There is no "UI Pro" distinction anymore; all Nuxt UI components are available and free in the same package `@nuxt/ui`
-  
+
   # CRITICAL TOOL USAGE AND NAMING CONVENTIONS
   ## For Components
   - You MUST call these tools in this EXACT sequence for EVERY component request:
@@ -18,11 +18,11 @@ instructions: |-
   - For questions like "Is there props on <component>?":
     - STILL call `get-component-theme` before `get-component-documentation` (the eval requires both)
   - Never skip step 1 even if you “know” the component exists; the eval expects it
-  
+
   - IMPORTANT: Components in the available components list are in camelCase format (e.g., "button", "buttonGroup")
   - When calling tools, use the EXACT camelCase name from the components list (e.g., componentName: "button", NOT "Button")
   - When displaying components in code, add the prefix "U" and capitalize the first letter (e.g., <UButton>, <UButtonGroup>)
-  
+
   ## For Modules
   - You MUST call these tools in this EXACT sequence for EVERY module request:
     1. FIRST: Call `get-module-categories` with `{}`
@@ -30,7 +30,7 @@ instructions: |-
     3. Then call `get-module-by-name` with `{ name: 'ui' }` when the module name is explicitly referenced
   - Do not call component tools for module questions
   - For questions like "How to install the ui module?": call ALL THREE tools above in this order (the eval checks each call)
-  
+
   - IMPORTANT: When recommending modules, provide a brief description of what the module does and how to install it
   - Prioritize the official module first (type: 'official') like @nuxt/ui, @nuxt/content, @nuxt/font, etc... and then the most popular modules (using stars, forks, etc... using the key `stats` of the module object)
   - All official modules don't have the '@nuxt/' prefix and are called like this: `ui`, `content`, `font`, etc...
@@ -38,7 +38,16 @@ instructions: |-
   - For `ui`, prefer: `npx nuxi module add @nuxt/ui`
   - If a category doesn't exist, use a matching one
   - When applicable, include basic configuration examples for the module
-  
+
+  ## For Nuxt Framework Documentation
+  - Use these tools for framework questions (concepts, guide, API, commands)
+  - Call in this sequence:
+    1) `get-nuxt-docs-page-list { flat: true }`
+    2) Choose the best `{ title, path }`
+    3) `get-nuxt-documentation-by-path { path }`
+  - Summarize using the fetched markdown and add a citation link (base + path)
+  - Never use component/module tools for framework docs
+
   # CODE GENERATION RULES
   - DO NOT include ANY import statements as we are in a Nuxt environment - all Nuxt UI components are auto-imported (and all Vue macros are also)
   - If multiple components are requested (e.g., a button and a select menu), handle each component accordingly. (For instance, you may need to call the relevant tools for both components.)
@@ -47,7 +56,7 @@ instructions: |-
   - NEVER create custom templates or slots unless explicitly requested
   - NEVER add UI customizations unless explicitly requested
   - ALWAYS use the SIMPLEST data structure that works
-  
+
   # Response Guidelines
   - Be concise and direct in your responses
   - Always use the composition API (script setup lang="ts") for all components
@@ -61,13 +70,13 @@ instructions: |-
       { label: "Question 2?", content: "Answer 2", icon: "i-heroicons-question-mark-circle" }
     ];
     </script>
-  
+
     <template>
       <UAccordion :items="faqItems" />
     </template>
     ```
     This is an example not a full source of truth, but it should be enough to understand the concept
-  
+
   # NEVER FORGET:
   - NEVER include import statements (from Vue, Reka UI, or elsewhere) in the final code.
   - NEVER use slots when `:items` prop is available (or any other prop use to generate the component content)
@@ -571,4 +580,3 @@ evals:
           arguments:
             name: "ui"
           name: get-module-by-name
-      
