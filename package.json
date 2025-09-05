@@ -35,6 +35,12 @@
       "title": "Search Modules",
       "description": "Search within Nuxt modules ecosystem",
       "mode": "view"
+    },
+    {
+      "name": "search-nuxt-docs",
+      "title": "Nuxt Documentation",
+      "description": "Search and browse Nuxt documentation",
+      "mode": "view"
     }
   ],
   "tools": [
@@ -87,6 +93,15 @@
       "placeholder": "https://ui.nuxt.com",
       "required": false,
       "default": "https://ui.nuxt.com"
+    },
+    {
+      "name": "nuxtDocsUrl",
+      "title": "Nuxt Docs Url",
+      "type": "textfield",
+      "description": "Base URL for Nuxt framework docs including version (no trailing slash)",
+      "placeholder": "https://nuxt.com/docs/4.x",
+      "required": false,
+      "default": "https://nuxt.com/docs/4.x"
     },
     {
       "name": "branch",

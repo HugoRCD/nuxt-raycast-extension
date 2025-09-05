@@ -66,9 +66,11 @@ export function sortComponentsByName(components: ComponentItem[]): ComponentItem
 type Preferences = {
   docsUrl?: string;
   branch?: string;
+  nuxtDocsUrl?: string;
 };
 
 const prefs = getPreferenceValues<Preferences>();
 
 export const DOCS_URL = (prefs.docsUrl || "https://ui.nuxt.com").replace(/\/$/, "");
 export const BRANCH = prefs.branch || "main";
+export const NUXT_DOCS_URL = (prefs.nuxtDocsUrl || "https://nuxt.com/docs/4.x").replace(/\/$/, "");
