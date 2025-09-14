@@ -33,7 +33,12 @@ export default function Command() {
   );
 
   return (
-    <List isLoading={isLoading} onSearchTextChange={setSearchText} searchBarPlaceholder="Search Nuxt UI components..." throttle>
+    <List
+      isLoading={isLoading}
+      onSearchTextChange={setSearchText}
+      searchBarPlaceholder="Search Nuxt UI components..."
+      throttle
+    >
       <List.Section title="Components">
         {baseComponents.map((component) => (
           <List.Item

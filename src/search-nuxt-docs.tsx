@@ -47,10 +47,7 @@ export default function Command() {
       .slice(0, 50); // cap to avoid huge lists
 
     if (deepMatches.length > 0) {
-      return [
-        ...sectioned,
-        { title: "More Results", items: deepMatches },
-      ];
+      return [...sectioned, { title: "More Results", items: deepMatches }];
     }
 
     return sectioned;
@@ -89,7 +86,7 @@ export default function Command() {
                       }
                     }}
                   />
-                  <Action.OpenInBrowser title="Open at nuxt.com" url={`${getNuxtDocsUrl()}${item.path}`} />
+                  <Action.OpenInBrowser title="Open at Nuxt.com" url={`${getNuxtDocsUrl()}${item.path}`} />
                 </ActionPanel>
               }
             />

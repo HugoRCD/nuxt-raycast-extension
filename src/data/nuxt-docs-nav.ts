@@ -23,8 +23,8 @@ const NAV_TREE: NuxtDocsNode[] = [
       { title: "Prerendering", path: "/getting-started/prerendering" },
       { title: "Deployment", path: "/getting-started/deployment" },
       { title: "Testing", path: "/getting-started/testing" },
-      { title: "Upgrade Guide", path: "/getting-started/upgrade" }
-    ]
+      { title: "Upgrade Guide", path: "/getting-started/upgrade" },
+    ],
   },
   {
     title: "Guide",
@@ -42,8 +42,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "Modules", path: "/guide/concepts/modules" },
           { title: "ES Modules", path: "/guide/concepts/esm" },
           { title: "TypeScript", path: "/guide/concepts/typescript" },
-          { title: "Code Style", path: "/guide/concepts/code-style" }
-        ]
+          { title: "Code Style", path: "/guide/concepts/code-style" },
+        ],
       },
       {
         title: "Directory Structure",
@@ -64,8 +64,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: ".nuxtrc", path: "/guide/directory-structure/nuxtrc" },
           { title: "nuxt.config.ts", path: "/guide/directory-structure/nuxt-config" },
           { title: "package.json", path: "/guide/directory-structure/package" },
-          { title: "tsconfig.json", path: "/guide/directory-structure/tsconfig" }
-        ]
+          { title: "tsconfig.json", path: "/guide/directory-structure/tsconfig" },
+        ],
       },
       {
         title: "Going Further",
@@ -82,8 +82,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "Nuxt Kit", path: "/guide/going-further/kit" },
           { title: "NuxtApp", path: "/guide/going-further/nuxt-app" },
           { title: "Authoring Nuxt Layers", path: "/guide/going-further/layers" },
-          { title: "Debugging", path: "/guide/going-further/debugging" }
-        ]
+          { title: "Debugging", path: "/guide/going-further/debugging" },
+        ],
       },
       {
         title: "Recipes",
@@ -92,8 +92,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "Custom Routing", path: "/guide/recipes/custom-routing" },
           { title: "Vite Plugins", path: "/guide/recipes/vite-plugin" },
           { title: "Custom useFetch", path: "/guide/recipes/custom-usefetch" },
-          { title: "Sessions and Authentication", path: "/guide/recipes/sessions-and-authentication" }
-        ]
+          { title: "Sessions and Authentication", path: "/guide/recipes/sessions-and-authentication" },
+        ],
       },
       {
         title: "Best Practices",
@@ -101,10 +101,10 @@ const NAV_TREE: NuxtDocsNode[] = [
         children: [
           { title: "Nuxt and hydration", path: "/guide/best-practices/hydration" },
           { title: "Nuxt Performance", path: "/guide/best-practices/performance" },
-          { title: "Nuxt Plugins", path: "/guide/best-practices/plugins" }
-        ]
-      }
-    ]
+          { title: "Nuxt Plugins", path: "/guide/best-practices/plugins" },
+        ],
+      },
+    ],
   },
   {
     title: "API",
@@ -128,8 +128,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "<NuxtErrorBoundary>", path: "/api/components/nuxt-error-boundary" },
           { title: "<NuxtWelcome>", path: "/api/components/nuxt-welcome" },
           { title: "<NuxtIsland>", path: "/api/components/nuxt-island" },
-          { title: "<NuxtImg>", path: "/api/components/nuxt-img" }
-        ]
+          { title: "<NuxtImg>", path: "/api/components/nuxt-img" },
+        ],
       },
       {
         title: "Composables",
@@ -163,8 +163,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "useRuntimeHook", path: "/api/composables/use-runtime-hook" },
           { title: "useSeoMeta", path: "/api/composables/use-seo-meta" },
           { title: "useServerSeoMeta", path: "/api/composables/use-server-seo-meta" },
-          { title: "useState", path: "/api/composables/use-state" }
-        ]
+          { title: "useState", path: "/api/composables/use-state" },
+        ],
       },
       {
         title: "Utils",
@@ -198,11 +198,11 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "setPageLayout", path: "/api/utils/set-page-layout" },
           { title: "setResponseStatus", path: "/api/utils/set-response-status" },
           { title: "showError", path: "/api/utils/show-error" },
-          { title: "updateAppConfig", path: "/api/utils/update-app-config" }
-        ]
+          { title: "updateAppConfig", path: "/api/utils/update-app-config" },
+        ],
       },
-      { title: "Nuxt Configuration", path: "/api/nuxt-config" }
-    ]
+      { title: "Nuxt Configuration", path: "/api/nuxt-config" },
+    ],
   },
   {
     title: "Examples",
@@ -217,8 +217,8 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "Data Fetching", path: "/examples/features/data-fetching" },
           { title: "State Management", path: "/examples/features/state-management" },
           { title: "Meta Tags", path: "/examples/features/meta-tags" },
-          { title: "Layouts", path: "/examples/features/layouts" }
-        ]
+          { title: "Layouts", path: "/examples/features/layouts" },
+        ],
       },
       {
         title: "Routing",
@@ -226,8 +226,8 @@ const NAV_TREE: NuxtDocsNode[] = [
         children: [
           { title: "Middleware", path: "/examples/routing/middleware" },
           { title: "Pages", path: "/examples/routing/pages" },
-          { title: "Universal Router", path: "/examples/routing/universal-router" }
-        ]
+          { title: "Universal Router", path: "/examples/routing/universal-router" },
+        ],
       },
       {
         title: "Advanced",
@@ -241,11 +241,15 @@ const NAV_TREE: NuxtDocsNode[] = [
           { title: "Teleport", path: "/examples/advanced/teleport" },
           { title: "Testing", path: "/examples/advanced/testing" },
           { title: "useCookie", path: "/examples/advanced/use-cookie" },
-          { title: "Use Custom Fetch Composable", path: "/examples/advanced/use-custom-fetch-composable" }
-        ]
+          { title: "Use Custom Fetch Composable", path: "/examples/advanced/use-custom-fetch-composable" },
+        ],
       },
-      { title: "Experimental", path: "/examples/experimental", children: [ { title: "WASM", path: "/examples/experimental/wasm" } ] }
-    ]
+      {
+        title: "Experimental",
+        path: "/examples/experimental",
+        children: [{ title: "WASM", path: "/examples/experimental/wasm" }],
+      },
+    ],
   },
   {
     title: "Community",
@@ -256,9 +260,9 @@ const NAV_TREE: NuxtDocsNode[] = [
       { title: "Contribution", path: "/community/contribution" },
       { title: "Framework", path: "/community/framework-contribution" },
       { title: "Roadmap", path: "/community/roadmap" },
-      { title: "Releases", path: "/community/changelog" }
-    ]
-  }
+      { title: "Releases", path: "/community/changelog" },
+    ],
+  },
 ];
 
 export default NAV_TREE;
