@@ -1,5 +1,5 @@
 import { $fetch } from "ofetch";
-import { DOCS_URL } from "../utils/search";
+import { getDocsUrl } from "../utils/search";
 
 type Input = {
   /**
@@ -21,7 +21,7 @@ export default async function tool(input: Input) {
   // Convert first letter to uppercase for the API call
   const componentName = input.componentName.charAt(0).toUpperCase() + input.componentName.slice(1);
 
-  return await $fetch(`${DOCS_URL}/raw/components/${componentName}.md`, {
+  return await $fetch(`${getDocsUrl()}/raw/components/${componentName}.md`, {
     method: "GET",
     headers: {
       "Content-Type": "text/plain",

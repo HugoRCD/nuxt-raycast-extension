@@ -2,7 +2,7 @@ import { Icon, open, showToast, Toast, getPreferenceValues } from "@raycast/api"
 import { showFailureToast } from "@raycast/utils";
 import { camelCase, kebabCase, pascalCase } from "scule";
 import type { ComponentInfo, ComponentContext } from "../types/components";
-import { DOCS_URL } from "./search";
+import { getDocsUrl } from "./search";
 import { showAnimatedToast, showSuccessToast } from "./commands";
 
 // Component catalogs
@@ -210,18 +210,56 @@ export function getComponentInfo(sanitizedName: string): ComponentInfo {
  * Builds the documentation URL based on component info and preferences
  */
 export function buildDocumentationUrl(context: ComponentContext): string {
+  const docsUrl = getDocsUrl();
   const { sanitizedName, hasProsePrefix, componentInfo } = context;
   const { isBase, isProse } = componentInfo;
 
-  if (hasProsePrefix) {
-    return `${DOCS_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
+  if (hasProsePrefix || (isProse && !isBase)) {
+    const prose = sanitizedName;
+
+    // Headers & text page anchors
+    const headersAndTextAnchors: Record<string, string> = {
+      h1: "heading-1",
+      h2: "heading-2",
+      h3: "heading-3",
+      h4: "heading-4",
+      p: "paragraph",
+      strong: "strong",
+      em: "emphasis",
+      a: "links",
+      blockquote: "blockquotes",
+      hr: "horizontal-rules",
+    };
+
+    if (prose in headersAndTextAnchors) {
+      return `${docsUrl}/typography/headers-and-text#${headersAndTextAnchors[prose]}`;
+    }
+
+    // Lists and tables page anchors
+    const listsAndTablesAnchors: Record<string, string> = {
+      ul: "unordered-list",
+      ol: "ordered-list",
+      table: "table",
+    };
+    if (prose in listsAndTablesAnchors) {
+      return `${docsUrl}/typography/lists-and-tables#${listsAndTablesAnchors[prose]}`;
+    }
+
+    // Code page
+    if (prose === "code" || prose === "pre") {
+      return `${docsUrl}/typography/code`;
+    }
+
+    // Images and embeds page
+    if (prose === "img") {
+      return `${docsUrl}/typography/images-and-embeds`;
+    }
+
+    // Typography components pages (accordion, badge, card, ...)
+    return `${docsUrl}/typography/${prose}`;
   }
 
-  if (isProse && !isBase) {
-    return `${DOCS_URL}/getting-started/typography#${sanitizedName.replace(/-/g, "")}`;
-  }
-
-  return `${DOCS_URL}/components/${sanitizedName}#theme`;
+  return `${docsUrl}/components/${sanitizedName}#theme`;
 }
 
 export function getComponentIcon(type: ComponentItem["type"]): Icon {

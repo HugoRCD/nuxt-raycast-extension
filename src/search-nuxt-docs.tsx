@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Icon, List, open, showToast, Toast } from "@raycast/api";
 import { useEffect, useMemo, useState } from "react";
 import type { NuxtDocsLink, NuxtDocsNode } from "./types/docs";
-import { NUXT_DOCS_URL } from "./utils/search";
+import { getNuxtDocsUrl } from "./utils/search";
 import NAV_TREE from "./data/nuxt-docs-nav";
 import { flattenDocsTree } from "./utils/docs";
 
@@ -78,7 +78,7 @@ export default function Command() {
                     icon={Icon.Globe}
                     onAction={async () => {
                       try {
-                        const url = `${NUXT_DOCS_URL}${item.path}`;
+                        const url = `${getNuxtDocsUrl()}${item.path}`;
                         await open(url);
                       } catch (e) {
                         await showToast({
@@ -89,7 +89,7 @@ export default function Command() {
                       }
                     }}
                   />
-                  <Action.OpenInBrowser title="Open at nuxt.com" url={`${NUXT_DOCS_URL}${item.path}`} />
+                  <Action.OpenInBrowser title="Open at nuxt.com" url={`${getNuxtDocsUrl()}${item.path}`} />
                 </ActionPanel>
               }
             />

@@ -97,16 +97,16 @@
     },
     {
       "name": "docsUrl",
-      "title": "Docs URL",
+      "title": "Nuxt UI Docs URL",
       "type": "textfield",
       "description": "Base URL for Nuxt UI docs (no trailing slash)",
-      "placeholder": "https://ui.nuxt.com",
+      "placeholder": "https://ui4.nuxt.com/docs",
       "required": false,
-      "default": "https://ui.nuxt.com"
+      "default": "https://ui4.nuxt.com/docs"
     },
     {
       "name": "nuxtDocsUrl",
-      "title": "Nuxt Docs Url",
+      "title": "Nuxt Docs URL",
       "type": "textfield",
       "description": "Base URL for Nuxt framework docs including version (no trailing slash)",
       "placeholder": "https://nuxt.com/docs/4.x",
@@ -124,7 +124,7 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.102.5",
+    "@raycast/api": "^1.102.7",
     "@raycast/utils": "^1.19.1",
     "ofetch": "^1.4.1",
     "scule": "^1.3.0"
