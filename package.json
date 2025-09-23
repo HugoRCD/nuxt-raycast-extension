@@ -2,6 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "nuxt",
   "title": "Nuxt",
+  "type": "module",
   "description": "Supercharge your Nuxt workflow",
   "icon": "icon.png",
   "author": "HugoRCD",

@@ -1,6 +1,6 @@
 import { Action, ActionPanel, Icon, List, open, showToast, Toast } from "@raycast/api";
 import { useEffect, useMemo, useState } from "react";
-import type { NuxtDocsLink, NuxtDocsNode } from "./types/docs";
+import type { NuxtDocsLink } from "./types/docs";
 import { getNuxtDocsUrl } from "./utils/search";
 import NAV_TREE from "./data/nuxt-docs-nav";
 import { flattenDocsTree } from "./utils/docs";
