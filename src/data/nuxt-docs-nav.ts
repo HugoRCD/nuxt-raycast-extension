@@ -1,6 +1,5 @@
 import type { NuxtDocsNode } from "../types/docs";
 
-// Keep only title + relative path (no domain, no version). Paths are relative to the versioned docs base.
 const NAV_TREE: NuxtDocsNode[] = [
   {
     title: "Get Started",
