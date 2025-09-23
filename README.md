@@ -33,6 +33,12 @@ Use the `@nuxt` agent inside Raycast AI Chat:
 - Explore modules and their capabilities
 - Solve common Nuxt development challenges
 
+### 📚 Nuxt Documentation Browser
+- Command: “Nuxt Documentation” (view)
+- Browse official docs by section (Get Started, Guide, API, Examples, Community)
+- Search titles and paths, including deep entries (e.g., WASM, JSX)
+- Opens pages using your versioned base (e.g., `https://nuxt.com/docs/4.x`)
+
 ### 🧩 Nuxt Modules Explorer
 Discover and learn about the vast Nuxt ecosystem:
 - Browse modules by category (UI, CMS, SEO, etc.)
@@ -50,6 +56,7 @@ Access Nuxt UI documentation and tools instantly:
 Customize to match your workflow (Preferences in Raycast):
 - `Prefix` for component names (default: `U`)
 - `Docs URL` for Nuxt UI (default: `https://ui.nuxt.com`)
+- `Nuxt Docs Url` for framework docs (default: `https://nuxt.com/docs/4.x`)
 - `UI Branch` for fetching themes from GitHub (default: `main`)
 
 ## 🎬 See It In Action
