@@ -71,7 +71,7 @@ type Preferences = {
 
 export function getDocsUrl(): string {
   const prefs = getPreferenceValues<Preferences>();
-  return (prefs.docsUrl || "https://ui4.nuxt.com/docs").replace(/\/$/, "");
+  return (prefs.docsUrl || "https://ui.nuxt.com/docs").replace(/\/$/, "");
 }
 
 export function getBranch(): string {

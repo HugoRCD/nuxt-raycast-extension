@@ -100,9 +100,9 @@
       "title": "Nuxt UI Docs URL",
       "type": "textfield",
       "description": "Base URL for Nuxt UI docs (no trailing slash)",
-      "placeholder": "https://ui4.nuxt.com/docs",
+      "placeholder": "https://ui.nuxt.com/docs",
       "required": false,
-      "default": "https://ui4.nuxt.com/docs"
+      "default": "https://ui.nuxt.com/docs"
     },
     {
       "name": "nuxtDocsUrl",
